@@ -1,5 +1,7 @@
 import javax.swing.*;
 
+// Sets up the GUI for the game window.
+
 public class GameWindow extends JFrame 
 {
 

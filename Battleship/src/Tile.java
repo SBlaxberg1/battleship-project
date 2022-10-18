@@ -1,5 +1,4 @@
-
-// Represents one tile of ocean.
+// Represents one tile of ocean. Note that this is data only, not GUI.
 
 public class Tile
 {
@@ -11,6 +10,7 @@ public class Tile
 	{
 		x = x_cord;
 		y = y_cord;
+		isOccupied = false;
 	}
 	
 	public int getX()
