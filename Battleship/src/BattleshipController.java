@@ -9,6 +9,7 @@ public class BattleshipController
 	{
 		b_model = model;
 		b_view = view;
+		//deez
 	}
 
 }
