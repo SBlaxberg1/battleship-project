@@ -43,9 +43,10 @@ public class GameWindow extends JFrame {
     		c.gridx = i;
     		c.gridy = j;
     		oceanPanel.add(ocean[i][j], c);
+    		
     	}
     }
-    frame.add(oceanPanel);
+    frame.add(oceanPanel, BorderLayout.NORTH);
 
   }
 
