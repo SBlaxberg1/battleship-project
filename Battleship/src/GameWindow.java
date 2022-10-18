@@ -30,14 +30,14 @@ public class GameWindow extends JFrame {
     GridBagConstraints c = new GridBagConstraints();
     c.fill = GridBagConstraints.HORIZONTAL;
     
-    oceanPanel.setBackground(Color.blue);
+    //oceanPanel.setBackground(Color.blue);
     
     //this.getContentPane().setLayout(new GridLayout(10, 10));
     for (int i=0; i<10; i++) {
     	for (int j=0; j<10; j++) {
     		ocean[i][j] = new JButton(" ");
-    		ocean[i][j].setText("test");
-    		ocean[i][j].setBounds(new Rectangle(20, 20, 20, 20));
+    		ocean[i][j].setText(" ");
+    		ocean[i][j].setBounds(20, 20);
     		ocean[i][j].setForeground(Color.red);
     		
     		c.gridx = i;
