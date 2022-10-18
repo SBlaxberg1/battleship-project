@@ -2,5 +2,10 @@
 
 public class BattleshipModel 
 {
+
+	BattleshipModel()
+	{
+		
+	}
 	
 }
