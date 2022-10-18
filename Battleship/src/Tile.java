@@ -1,20 +1,16 @@
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 
 // Represents one tile of ocean.
 
-public class Tile extends JLabel
+public class Tile
 {
 	private int x;
 	private int y;
-	private ImageIcon icon;
 	private boolean isOccupied;
 	
-	public Tile(int x_cord, int y_cord, String img)
+	public Tile(int x_cord, int y_cord)
 	{
 		x = x_cord;
 		y = y_cord;
-		this.setIcon(new ImageIcon(img));
 	}
 	
 	public int getX()
@@ -25,11 +21,6 @@ public class Tile extends JLabel
 	public int getY()
 	{
 		return y;
-	}
-	
-	public void setIcon(String img)
-	{
-		this.setIcon(new ImageIcon(img));
 	}
 	
 	public boolean getOccupied()
