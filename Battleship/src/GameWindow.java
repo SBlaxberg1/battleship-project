@@ -36,7 +36,7 @@ public class GameWindow extends JFrame {
     for (int i=0; i<10; i++) {
     	for (int j=0; j<10; j++) {
     		ocean[i][j] = new JButton(" ");
-    		ocean[i][j].setText("test");
+    		ocean[i][j].setText(" ");
     		ocean[i][j].setBounds(20, 20, 20, 20);
     		ocean[i][j].setForeground(Color.red);
     		
@@ -47,7 +47,6 @@ public class GameWindow extends JFrame {
     	}
     }
     frame.add(oceanPanel, BorderLayout.NORTH);
-    // test
   }
 
 }
