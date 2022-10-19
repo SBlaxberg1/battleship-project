@@ -11,18 +11,16 @@ public class PlayerClient extends Player {
 
     public PlayerClient() throws UnknownHostException, IOException, ClassNotFoundException, InterruptedException{
         //get the localhost IP address, if server is running on some other IP, you need to use that
-        InetAddress host = InetAddress.getLocalHost();
+        InetAddress host = InetAddress.getByName("192.168.135.78");
         Socket socket = null;
         ObjectOutputStream oos = null;
         ObjectInputStream ois = null;
-        for(int i=0; i<5;i++){
             //establish socket connection to server
             socket = new Socket(host.getHostName(), 9876);
             //write to socket using ObjectOutputStream
             oos = new ObjectOutputStream(socket.getOutputStream());
             System.out.println("Sending request to Socket Server");
-            if(i==4)oos.writeObject("exit");
-            else oos.writeObject(""+i);
+            oos.writeObject("exit");
             //read the server response message
             ois = new ObjectInputStream(socket.getInputStream());
             String message = (String) ois.readObject();
@@ -31,7 +29,6 @@ public class PlayerClient extends Player {
             ois.close();
             oos.close();
             Thread.sleep(100);
-        }
     }
     
 }
