@@ -1,4 +1,4 @@
-// A data model containing all information used in the game.
+// (Model) A data model containing all information used in the game.
 
 public class BattleshipModel 
 {

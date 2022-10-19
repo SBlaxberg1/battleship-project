@@ -1,4 +1,4 @@
-// Represents a field of tiles. Note that this is data only, not GUI.
+// (Model) Represents a field of tiles.
 
 public class Grid
 {

@@ -1,4 +1,4 @@
-// Abstract class for ships
+// (Model) Abstract class for ships
 
 public abstract class Ship {
 

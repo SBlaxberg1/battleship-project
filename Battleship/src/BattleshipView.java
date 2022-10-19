@@ -1,4 +1,4 @@
-// Provides the GUI and displays information to the user.
+// (View) Provides the GUI and displays information to the user.
 
 public class BattleshipView 
 {

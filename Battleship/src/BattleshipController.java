@@ -1,4 +1,4 @@
-// Handles user interaction and updates model and view accordingly.
+// (Controller) Handles user interaction and updates model and view accordingly.
 
 public class BattleshipController 
 {
@@ -9,7 +9,7 @@ public class BattleshipController
 	{
 		b_model = model;
 		b_view = view;
-		//deez
+		
 	}
 
 }
