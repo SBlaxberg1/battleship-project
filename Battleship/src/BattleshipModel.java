@@ -15,7 +15,8 @@ public class BattleshipModel
 		ServerGrid = new Grid();
 		ClientGrid = new Grid();
 		state = new GameState(2); // starts the game in Setup Mode
-		
+	
+		/*
 		//TODO: Move to separate class
 		Scanner inp = new Scanner(System.in);  // Create a Scanner object
 	    System.out.println("Enter 0 to be the Server, or 1 to be the client");
@@ -33,6 +34,7 @@ public class BattleshipModel
 	    {
 	    	System.out.println("Invalid input. See ya");
 	    }
+	    */
 	}
 	
 }
