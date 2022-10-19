@@ -66,6 +66,7 @@ public class GameWindow extends JFrame {
 		  }
 	  }
 	  frame.add(clientPanel, BorderLayout.SOUTH);
+	  
   }
 
 }
