@@ -8,8 +8,9 @@ public class BattleshipController
 	BattleshipController(BattleshipModel model, BattleshipView view)
 	{
 		b_model = model;
-		b_view = view;
-		
+		b_view = view;		
 	}
+	
+	
 
 }
