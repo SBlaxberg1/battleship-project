@@ -33,10 +33,14 @@ public class GameWindow extends JFrame {
     GridBagConstraints c = new GridBagConstraints();
     c.fill = GridBagConstraints.HORIZONTAL;
     
+    ImageIcon reticle = new ImageIcon("reticle.png");
+    Image icon = reticle.getImage();
+    Image resize = icon.getScaledInstance(20,  20,  java.awt.Image.SCALE_SMOOTH);
+    reticle = new ImageIcon(resize);
+    
     for (int i=0; i<10; i++) {
     	for (int j=0; j<10; j++) {
-    		serverGrid[i][j] = new JButton(" ");
-    		serverGrid[i][j].setText(" ");
+    		serverGrid[i][j] = new JButton(reticle);
     		serverGrid[i][j].setBounds(0, 0, 20, 20);
     		
     		c.gridx = i;
@@ -55,10 +59,17 @@ public class GameWindow extends JFrame {
 	  GridBagConstraints c = new GridBagConstraints();
 	  c.fill = GridBagConstraints.HORIZONTAL;
 	  
+	  Background bg = new Background(new ImageIcon("oceanBG.jpg").getImage());
+	  frame.add(bg);
+	  
+	  ImageIcon ocean = new ImageIcon("ocean_empty.png");
+	  Image icon = ocean.getImage();
+	  Image resize = icon.getScaledInstance(20,  20,  java.awt.Image.SCALE_SMOOTH);
+	  ocean = new ImageIcon(resize);
+	  
 	  for (int i=0; i<10; i++) {
 		  for (int j=0; j<10; j++) {
-			  clientGrid[i][j] = new JButton(" ");
-			  clientGrid[i][j].setText(" ");
+			  clientGrid[i][j] = new JButton(ocean);
 			  clientGrid[i][j].setBounds(0, 0, 20, 20);
 			  
 			  c.gridx = i;
@@ -69,4 +80,28 @@ public class GameWindow extends JFrame {
 	  frame.add(clientPanel, BorderLayout.SOUTH);
   }
 
+}
+
+class Background extends JPanel{
+	
+	private Image img;
+	
+	public Background(String img) {
+		this(new ImageIcon(img).getImage());
+	}
+	
+	public Background(Image img) {
+		this.img = img;
+		Dimension size = new Dimension(img.getWidth(null), img.getHeight(null));
+		setPreferredSize(size);
+		setMinimumSize(size);
+		setMaximumSize(size);
+		setSize(size);
+		setLayout(null);
+	}
+	
+	public void paintComponent(Graphics g) {
+		g.drawImage(img,  0,  0,  null);
+	}
+	
 }
