@@ -59,9 +59,6 @@ public class GameWindow extends JFrame {
 	  GridBagConstraints c = new GridBagConstraints();
 	  c.fill = GridBagConstraints.HORIZONTAL;
 	  
-	  Background bg = new Background(new ImageIcon("oceanBG.jpg").getImage());
-	  frame.add(bg);
-	  
 	  ImageIcon ocean = new ImageIcon("ocean_empty.png");
 	  Image icon = ocean.getImage();
 	  Image resize = icon.getScaledInstance(20,  20,  java.awt.Image.SCALE_SMOOTH);
@@ -80,28 +77,4 @@ public class GameWindow extends JFrame {
 	  frame.add(clientPanel, BorderLayout.SOUTH);
   }
 
-}
-
-class Background extends JPanel{
-	
-	private Image img;
-	
-	public Background(String img) {
-		this(new ImageIcon(img).getImage());
-	}
-	
-	public Background(Image img) {
-		this.img = img;
-		Dimension size = new Dimension(img.getWidth(null), img.getHeight(null));
-		setPreferredSize(size);
-		setMinimumSize(size);
-		setMaximumSize(size);
-		setSize(size);
-		setLayout(null);
-	}
-	
-	public void paintComponent(Graphics g) {
-		g.drawImage(img,  0,  0,  null);
-	}
-	
 }
