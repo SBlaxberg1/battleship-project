@@ -16,7 +16,7 @@ public class PlayerClient extends Player {
         public void launch()
         {
 
-        	String hostname = "localhost";
+        	String hostname = "192.168.165.38";
         	int port = 6789;
 
 	        // declaration section:
@@ -33,7 +33,7 @@ public class PlayerClient extends Player {
 	        // Try to open input and output streams
 	
 	            try {
-	                clientSocket = new Socket(hostname, port);
+	                clientSocket = new Socket(InetAddress.getByName(hostname), port);
 	                os = new DataOutputStream(clientSocket.getOutputStream());
 	                is = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 	            } catch (UnknownHostException e) {
