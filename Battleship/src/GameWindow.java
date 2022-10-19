@@ -6,7 +6,6 @@ import javax.swing.*;
 // (View) Creates the Game Window and GUI
 
 public class GameWindow extends JFrame {
-	
 	JFrame frame;
 	JPanel serverPanel;
 	JPanel clientPanel;
