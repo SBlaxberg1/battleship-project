@@ -4,13 +4,13 @@ public class Tile
 {
 	private int x;
 	private int y;
-	private boolean isOccupied;
+	private Ship occupant;
 	
 	public Tile(int x_cord, int y_cord)
 	{
 		x = x_cord;
 		y = y_cord;
-		isOccupied = false;
+		occupant = null;
 	}
 	
 	public int getX()
@@ -23,14 +23,14 @@ public class Tile
 		return y;
 	}
 	
-	public boolean getOccupied()
+	public Ship getOccupant()
 	{
-		return isOccupied;
+		return occupant;
 	}
 	
-	public void setOccupied(boolean b)
+	public void setOccupied(Ship s)
 	{
-		isOccupied = b;
+		occupant = s;
 	}
 	
 }
