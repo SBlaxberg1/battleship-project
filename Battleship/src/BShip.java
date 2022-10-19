@@ -1,3 +1,4 @@
+// (Model)
 
 public class BShip extends Ship {
 	

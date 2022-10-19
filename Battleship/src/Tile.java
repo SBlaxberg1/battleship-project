@@ -1,4 +1,4 @@
-// Represents one tile of ocean. Note that this is data only, not GUI.
+// (Model) Represents one tile of ocean.
 
 public class Tile
 {

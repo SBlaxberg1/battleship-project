@@ -1,4 +1,4 @@
-// Test driver to launch the game.
+// (Launcher) Test driver to launch the game.
 
 public class BattleshipGame 
 {
