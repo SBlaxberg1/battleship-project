@@ -38,6 +38,7 @@ public class GameWindow extends JFrame {
 	serverPanel = new JPanel();
 	serverPanel.setBounds(0, 0, 500, 500);
 	serverPanel.setLayout(new GridBagLayout());
+	serverPanel.setBorder(BorderFactory.createLineBorder(Color.red));
     GridBagConstraints c = new GridBagConstraints();
     c.fill = GridBagConstraints.HORIZONTAL;
     
@@ -64,6 +65,7 @@ public class GameWindow extends JFrame {
 	  clientPanel = new JPanel();
 	  clientPanel.setBounds(0,0, 500, 500);
 	  clientPanel.setLayout(new GridBagLayout());
+	  clientPanel.setBorder(BorderFactory.createLineBorder(Color.blue));
 	  GridBagConstraints c = new GridBagConstraints();
 	  c.fill = GridBagConstraints.HORIZONTAL;
 	  
@@ -87,18 +89,57 @@ public class GameWindow extends JFrame {
   
   public void initServerShips() {
 	  serverShips = new JPanel();
+	  serverShips.setLayout(new GridLayout(3, 1));
+	  serverShips.setBorder(BorderFactory.createLineBorder(Color.red));
 	  
 	  JTextArea enemyRemaining = new JTextArea("Enemy ships remaining:");
 	  serverShips.add(enemyRemaining);
+	  
+	  JPanel topShips = new JPanel();
+	  topShips.setLayout(new GridLayout(1, 3));
+	  JPanel bottomShips = new JPanel();
+	  bottomShips.setLayout(new GridLayout(1, 2));
+	  JTextArea carrier = new JTextArea("Carrier");
+	  JTextArea bship = new JTextArea("Battleship");
+	  JTextArea cruiser = new JTextArea("Cruiser");
+	  JTextArea submarine = new JTextArea("Submarine");
+	  JTextArea destroyer = new JTextArea("Destroyer");
+	  topShips.add(carrier);
+	  topShips.add(bship);
+	  topShips.add(cruiser);
+	  bottomShips.add(submarine);
+	  bottomShips.add(destroyer);
+	  serverShips.add(topShips);
+	  serverShips.add(bottomShips);
+	  
 	  
 	  primaryPanel.add(serverShips);
   }
   
   public void initClientShips() {
 	  clientShips = new JPanel();
+	  clientShips.setLayout(new GridLayout(3, 1));
+	  clientShips.setBorder(BorderFactory.createLineBorder(Color.blue));
 	  
 	  JTextArea friendlyRemaining = new JTextArea("Friendly ships remaining:");
 	  clientShips.add(friendlyRemaining);
+	  
+	  JPanel topShips = new JPanel();
+	  topShips.setLayout(new GridLayout(1, 3));
+	  JPanel bottomShips = new JPanel();
+	  bottomShips.setLayout(new GridLayout(1, 2));
+	  JTextArea carrier = new JTextArea("Carrier");
+	  JTextArea bship = new JTextArea("Battleship");
+	  JTextArea cruiser = new JTextArea("Cruiser");
+	  JTextArea submarine = new JTextArea("Submarine");
+	  JTextArea destroyer = new JTextArea("Destroyer");
+	  topShips.add(carrier);
+	  topShips.add(bship);
+	  topShips.add(cruiser);
+	  bottomShips.add(submarine);
+	  bottomShips.add(destroyer);
+	  clientShips.add(topShips);
+	  clientShips.add(bottomShips);
 	  
 	  primaryPanel.add(clientShips);
   }
