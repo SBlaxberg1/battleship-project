@@ -10,6 +10,6 @@ public class BattleshipView
 	{
 		b_model = model;
 		netWindow = new NetworkWindow();
-		gameWindow = new GameWindow();
+		//gameWindow = new GameWindow();
 	}
 }
