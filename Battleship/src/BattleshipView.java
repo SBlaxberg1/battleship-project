@@ -17,7 +17,7 @@ public class BattleshipView
 		Scanner inp = new Scanner(System.in);
 		String input = inp.nextLine();
 		
-		//gameWindow = new GameWindow();
+		gameWindow = new GameWindow();
 		if (input.equals("-1"))
 		{
 			Server application = new Server(); // create server
