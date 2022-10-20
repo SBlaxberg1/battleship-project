@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 // (View) Provides the GUI and displays information to the user.
 
 public class BattleshipView 
@@ -6,7 +8,7 @@ public class BattleshipView
 	private GameWindow gameWindow;
 	private BattleshipModel b_model;
 	
-	BattleshipView(BattleshipModel model)
+	BattleshipView(BattleshipModel model) throws IOException
 	{
 		b_model = model;
 		netWindow = new NetworkWindow();
