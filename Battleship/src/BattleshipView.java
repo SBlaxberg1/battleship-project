@@ -10,5 +10,4 @@ public class BattleshipView
 		b_model = model;
 		window = new GameWindow();
 	}
-	
 }
