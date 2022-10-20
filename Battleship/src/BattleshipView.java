@@ -2,12 +2,14 @@
 
 public class BattleshipView 
 {
-	private GameWindow window;
+	private NetworkWindow netWindow;
+	private GameWindow gameWindow;
 	private BattleshipModel b_model;
 	
 	BattleshipView(BattleshipModel model)
 	{
 		b_model = model;
-		window = new GameWindow();
+		netWindow = new NetworkWindow();
+		gameWindow = new GameWindow();
 	}
 }
