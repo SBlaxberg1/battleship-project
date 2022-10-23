@@ -1,0 +1,80 @@
+// Sam Blaxberg and Andrew DePace
+
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.EventQueue;
+import java.awt.Point;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
+
+public class DragNDrop {
+
+    public static void main(String[] args) {
+        new DragNDrop();
+    }
+
+    public DragNDrop() {
+        EventQueue.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                JFrame frame = new JFrame("Drag And Drop Demo");
+                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                frame.add(new DNDPane());
+                frame.pack();
+                frame.setLocationRelativeTo(null);
+                frame.setVisible(true);
+            }
+        });
+    }
+
+    @SuppressWarnings("serial")
+	public class DNDPane extends JLayeredPane {
+
+        public DNDPane() {
+        			Icon img = new ImageIcon("a.png");
+                    JLabel label = new JLabel(img);
+                    label.setSize(label.getPreferredSize());
+                    label.setLocation(20, 20);
+                    MouseHandler mh  = new MouseHandler();
+                    label.addMouseListener(mh);
+                    label.addMouseMotionListener(mh);
+                    add(label);
+        }
+
+        @Override
+        public Dimension getPreferredSize() {
+            return new Dimension(1200, 720);
+        }
+
+        public class MouseHandler extends MouseAdapter {
+
+            private Point offset;
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+                JLabel label = (JLabel) e.getComponent();
+                moveToFront(label);
+                offset = e.getPoint();
+            }
+
+            @Override
+            public void mouseDragged(MouseEvent e) {
+                int x = e.getPoint().x - offset.x;
+                int y = e.getPoint().y - offset.y;
+                Component component = e.getComponent();
+                Point location = component.getLocation();
+                location.x += x;
+                location.y += y;
+                component.setLocation(location);
+            }
+
+        }
+
+    }
+
+}
