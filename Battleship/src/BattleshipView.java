@@ -7,27 +7,26 @@ import javax.swing.JFrame;
 
 public class BattleshipView 
 {
-	private GameWindow gameWindow;
+	private ServerGameWindow sGameWindow;
+	private ClientGameWindow cGameWindow;
 	private BattleshipModel b_model;
 	
 	BattleshipView(BattleshipModel model) throws IOException
 	{
 		b_model = model;
-		System.out.println("-1 for host, ip for join");
+		System.out.println("Enter an IP to join an existing game, or type -1 to host your own!");
 		Scanner inp = new Scanner(System.in);
 		String input = inp.nextLine();
 		
-		gameWindow = new GameWindow();
 		if (input.equals("-1"))
 		{
-			Server application = new Server(); // create server
-			application.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
-			application.runServer(); // run server application
+			sGameWindow = new ServerGameWindow();
+			sGameWindow.runServer();
 		} else
 		{
-			Client application = new Client(input); // use args to connect
-		    application.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
-		    application.runClient(); // run client application
+			cGameWindow = new ClientGameWindow();
+			cGameWindow.runClient(input);
 		}
+		inp.close();
 	}
 }

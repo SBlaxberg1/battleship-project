@@ -1,8 +1,6 @@
 //Part of BattleshipView.java
 
 import java.awt.Color;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
@@ -20,6 +18,7 @@ import javax.swing.JTextArea;
 
 // (View) Creates the Game Window and GUI
 
+@SuppressWarnings("serial")
 public class GameWindow extends JFrame {
 	JFrame frame;
 	JPanel primaryPanel;
@@ -48,58 +47,14 @@ public class GameWindow extends JFrame {
 	  frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
   }
 
-  public void initServerGrid() {
-	  
-	serverPanel = new JPanel();
-	serverPanel.setBounds(0, 0, 500, 500);
-	serverPanel.setLayout(new GridBagLayout());
-	serverPanel.setBorder(BorderFactory.createLineBorder(Color.red));
-    GridBagConstraints c = new GridBagConstraints();
-    c.fill = GridBagConstraints.HORIZONTAL;
-    
-    ImageIcon reticle = new ImageIcon("Images/reticle.png");
-    Image icon = reticle.getImage();
-    Image resize = icon.getScaledInstance(22,  22,  java.awt.Image.SCALE_SMOOTH);
-    reticle = new ImageIcon(resize);
-    
-    for (int i=0; i<10; i++) {
-    	for (int j=0; j<10; j++) {
-    		serverGrid[i][j] = new JButton(reticle);
-    		serverGrid[i][j].setBounds(0, 0, 22, 22);
-    		
-    		c.gridx = i;
-    		c.gridy = j;
-    		serverPanel.add(serverGrid[i][j], c);
-    		
-    	}
-    }
-    primaryPanel.add(serverPanel);
-  }
+ public void initServerGrid()
+ {
+	 
+ }
   
-  public void initClientGrid(){
-	  clientPanel = new JPanel();
-	  clientPanel.setBounds(0,0, 500, 500);
-	  clientPanel.setLayout(new GridBagLayout());
-	  clientPanel.setBorder(BorderFactory.createLineBorder(Color.blue));
-	  GridBagConstraints c = new GridBagConstraints();
-	  c.fill = GridBagConstraints.HORIZONTAL;
+  public void initClientGrid()
+  {
 	  
-	  ImageIcon ocean = new ImageIcon("Images/ocean_empty.png");
-	  Image icon = ocean.getImage();
-	  Image resize = icon.getScaledInstance(22,  22,  java.awt.Image.SCALE_SMOOTH);
-	  ocean = new ImageIcon(resize);
-	  
-	  for (int i=0; i<10; i++) {
-		  for (int j=0; j<10; j++) {
-			  clientGrid[i][j] = new JButton(ocean);
-			  clientGrid[i][j].setBounds(0, 0, 22, 22);
-			  
-			  c.gridx = i;
-			  c.gridy = j;
-			  clientPanel.add(clientGrid[i][j], c);
-		  }
-	  }
-	  primaryPanel.add(clientPanel);
   }
   
   public void initServerShips() throws IOException{
