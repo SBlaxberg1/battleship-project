@@ -28,7 +28,7 @@ public class Tile
 		return occupant;
 	}
 	
-	public void setOccupied(Ship s)
+	public void setOccupant(Ship s)
 	{
 		occupant = s;
 	}
