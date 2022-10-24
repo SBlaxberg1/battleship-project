@@ -138,7 +138,7 @@ public class ClientGameWindow extends GameWindow {
 	      System.out.println(messageToDisplay);
 	   } // end method displayMessage
 	   
-	   public void initServerGrid() {
+	   public void initEnemyGrid() {
 			  
 			serverPanel = new JPanel();
 			serverPanel.setBounds(0, 0, 500, 500);
@@ -173,7 +173,7 @@ public class ClientGameWindow extends GameWindow {
 		    primaryPanel.add(serverPanel);
 		  }
 	   
-	   public void initClientGrid(){
+	   public void initPlayerGrid(){
 			  clientPanel = new JPanel();
 			  clientPanel.setBounds(0,0, 500, 500);
 			  clientPanel.setLayout(new GridBagLayout());
@@ -190,6 +190,15 @@ public class ClientGameWindow extends GameWindow {
 				  for (int j=0; j<10; j++) {
 					  clientGrid[i][j] = new JButton(ocean);
 					  clientGrid[i][j].setBounds(0, 0, 22, 22);
+			    		final int x = i;
+						final int y = j;
+			    		serverGrid[i][j].addActionListener(new ActionListener() { 
+			    			  public void actionPerformed(ActionEvent e) { 
+			    				  processClickPlayerGrid(x,y);
+			    			  } 
+			    			} );
+			    		
+					  
 					  c.gridx = i;
 					  c.gridy = j;
 					  clientPanel.add(clientGrid[i][j], c);
@@ -200,14 +209,16 @@ public class ClientGameWindow extends GameWindow {
 	   
 	   public void processClickEnemyGrid(int x, int y)
 	   {
-		   // SETUP PHASE
-		   if (windowModel.getGameState() == 2)
+
+		   if (windowModel.getGameState() == 2) // SETUP PHASE
 		   {
 			   // do nothing, game is setting up
+			   System.out.println("It's not your turn!");
 			   
 		   } else if (windowModel.getGameState() == 0) //server's turn
 		   {
 			   // do nothing, it's not your turn
+			   System.out.println("It's not your turn!");
 		   
 		   } else if (windowModel.getGameState() == 1) // client's turn
 		   {
@@ -218,8 +229,17 @@ public class ClientGameWindow extends GameWindow {
 		   } else
 		   {
 			   // do nothing
-		   }
+			   System.out.println("It's not your turn!");
+		   }			   
+	   }
+	   
+	   public void processClickPlayerGrid(int x, int y)
+	   {
+		   if (windowModel.getGameState() == 2)  // SETUP PHASE
+		   {
+			   //place ship
 			   
+		   }
 	   }
 }
 

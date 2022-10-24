@@ -37,27 +37,27 @@ public class GameWindow extends JFrame {
 	  frame = new JFrame("Battleship");
 	  primaryPanel = new JPanel();
 	  primaryPanel.setLayout(new GridLayout(2, 2));
-	  initServerGrid();
-	  initServerShips();
-	  initClientGrid();
-	  initClientShips();
+	  initEnemyGrid();
+	  initEnemyShips();
+	  initPlayerGrid();
+	  initPlayerShips();
 	  frame.add(primaryPanel);
 	  frame.setVisible(true);
 	  frame.setSize(1280, 720);
 	  frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
   }
 
- public void initServerGrid()
+ public void initEnemyGrid()
  {
 	 
  }
   
-  public void initClientGrid()
+  public void initPlayerGrid()
   {
 	  
   }
   
-  public void initServerShips() throws IOException{
+  public void initEnemyShips() throws IOException{
 	  serverShips = new JPanel();
 	  serverShips.setLayout(new GridLayout(3, 1));
 	  serverShips.setBorder(BorderFactory.createLineBorder(Color.red));
@@ -116,7 +116,7 @@ public class GameWindow extends JFrame {
 	  primaryPanel.add(serverShips);
   }
   
-  public void initClientShips() throws IOException {
+  public void initPlayerShips() throws IOException {
 	  clientShips = new JPanel();
 	  clientShips.setLayout(new GridLayout(3, 1));
 	  clientShips.setBorder(BorderFactory.createLineBorder(Color.blue));

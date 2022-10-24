@@ -146,7 +146,7 @@ public class ServerGameWindow extends GameWindow {
 	      System.out.println(messageToDisplay);
 	   } // end method displayMessage
 	   
-	   public void initServerGrid() {
+	   public void initEnemyGrid() {
 			  
 			serverPanel = new JPanel();
 			serverPanel.setBounds(0, 0, 500, 500);
@@ -181,7 +181,7 @@ public class ServerGameWindow extends GameWindow {
 		    primaryPanel.add(serverPanel);
 		  }
 	   
-	   public void initClientGrid(){
+	   public void initPlayerGrid(){
 			  clientPanel = new JPanel();
 			  clientPanel.setBounds(0,0, 500, 500);
 			  clientPanel.setLayout(new GridBagLayout());
@@ -212,10 +212,12 @@ public class ServerGameWindow extends GameWindow {
 		   if (windowModel.getGameState() == 2)
 		   {
 			   // do nothing, game is setting up
+			   System.out.println("It's not your turn!");
 			   
 		   } else if (windowModel.getGameState() == 1) //client turn
 		   {
 			   // do nothing, it's not your turn
+			   System.out.println("It's not your turn!");
 		   
 		   } else if (windowModel.getGameState() == 0) // server turn
 		   {
@@ -226,6 +228,7 @@ public class ServerGameWindow extends GameWindow {
 		   } else
 		   {
 			   // do nothing
+			   System.out.println("It's not your turn!");
 		   }
 			   
 	   }
