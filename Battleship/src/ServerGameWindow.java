@@ -24,10 +24,12 @@ public class ServerGameWindow extends GameWindow {
 	   private ServerSocket server; // server socket
 	   private Socket connection; // connection to client
 	   private int counter = 1; // counter of number of connections
+	   private BattleshipModel windowModel;
 
-	   public ServerGameWindow() throws IOException
+	   public ServerGameWindow(BattleshipModel bmod) throws IOException
 	   {
 		   super();
+		   windowModel = bmod;	
 	   }
 	   
 	   // set up and run server 
@@ -166,7 +168,7 @@ public class ServerGameWindow extends GameWindow {
 					final int y = j;
 		    		serverGrid[i][j].addActionListener(new ActionListener() { 
 		    			  public void actionPerformed(ActionEvent e) { 
-		    				  sendData("" + x + y);
+		    				  processClickEnemyGrid(x,y);
 		    			  } 
 		    			} );
 		    		
@@ -203,5 +205,29 @@ public class ServerGameWindow extends GameWindow {
 			  }
 			  primaryPanel.add(clientPanel);
 		  }
+	   
+	   public void processClickEnemyGrid(int x, int y)
+	   {
+		   // SETUP PHASE
+		   if (windowModel.getGameState() == 2)
+		   {
+			   // do nothing, game is setting up
+			   
+		   } else if (windowModel.getGameState() == 1) //client turn
+		   {
+			   // do nothing, it's not your turn
+		   
+		   } else if (windowModel.getGameState() == 0) // server turn
+		   {
+			   // send shot to opponent
+			   // TODO: This should return something to indicate hit or miss
+			   sendData("" + x + y); 
+		   
+		   } else
+		   {
+			   // do nothing
+		   }
+			   
+	   }
 }
 
