@@ -2,28 +2,25 @@ import java.util.Scanner;
 
 public class Setup {
 	
-	private Tile[][] serverGrid;
-	private Tile[][] clientGrid;
-	private Carrier serverCarrier;
+	private Tile[][] grid;
+	private Carrier carrier;
 	private Carrier clientCarrier;
-	private BShip serverBShip;
+	private BShip bShip;
 	private BShip clientBShip;
-	private Cruiser serverCruiser;
+	private Cruiser cruiser;
 	private Cruiser clientCruiser;
-	private Submarine serverSubmarine;
+	private Submarine submarine;
 	private Submarine clientSubmarine;
-	private Destroyer serverDestroyer;
+	private Destroyer destroyer;
 	private Destroyer clientDestroyer;
 	
 	
 	public Setup() {
-		serverGrid = new Tile[10][10];
-		clientGrid = new Tile[10][10];
+		grid = new Tile[10][10];
 		
 		for (int i=0; i<10; i++) {
 			for (int j=0; j<10; j++) {
-				serverGrid[i][j] = new Tile(i, j);
-				clientGrid[i][j] = new Tile(i, j);
+				grid[i][j] = new Tile(i, j);
 			}
 		}
 		
@@ -31,36 +28,21 @@ public class Setup {
 	
 	public void startGame() {
 		
-		placeCarrier(1);
-		placeBShip(1);
-		placeCruiser(1);
-		placeSubmarine(1);
-		placeDestroyer(1);
+		placeCarrier(1, 1, true);
+		placeBShip(2, 2, true);
+		placeCruiser(3, 3, true);
+		placeSubmarine(4, 4, true);
+		placeDestroyer(5, 5, true);
 		
-		placeCarrier(2);
-		placeBShip(2);
-		placeCruiser(2);
-		placeSubmarine(2);
-		placeDestroyer(2);
 	}
 	
-	public void placeCarrier(int player) {
-		Scanner input = new Scanner(System.in);
-		boolean invalid;
-		int row;
-		int column;
-		boolean isHorizontal;
+	public void placeCarrier(int x, int y, boolean h) {
+		boolean invalid = false;
+		int row = x;
+		int column = y;
+		boolean isHorizontal = h;
 		
-		do {
-		invalid = false;
-		System.out.println("Place the Carrier (5 spaces)");
-		System.out.print("Beginning coordinate row: ");
-		row = input.nextInt();
-		System.out.print("Beginning coordinate column: ");
-		column = input.nextInt();
-		System.out.print("Is the ship horizontal (True or False)? ");
-		isHorizontal = input.nextBoolean();
-		
+		System.out.println("Place the Carrier (5 spaces)");	
 		
 		if (isHorizontal == true && column > 6) {
 			System.out.println("Invalid");
@@ -74,88 +56,45 @@ public class Setup {
 		column -= 1;
 		
 		if (invalid != true) {
-		if (player == 1) {
-			if (isHorizontal == true) {
-				for (int i = column; i < column + 5; i++) {
-					if (serverGrid[row][i].getOccupant() != null) {
-						System.out.println("There is a ship here already");
-						invalid = true;
-					}
-				}
-			} else {
-				for (int i = row; i < row + 5; i++) {
-					if (serverGrid[i][column].getOccupant() != null) {
-						System.out.println("There is a ship here already");
-						invalid = true;
-					}
+		if (isHorizontal == true) {
+			for (int i = column; i < column + 5; i++) {
+				if (grid[row][i].getOccupant() != null) {
+					System.out.println("There is a ship here already");
+					invalid = true;
 				}
 			}
-		} else if (player == 2) {
-			if (isHorizontal == true) {
-				for (int i = column; i < column + 5; i++) {
-					if (clientGrid[row][i].getOccupant() != null) {
-						System.out.println("There is a ship here already");
-						invalid = true;
-					}
-				}
-			} else {
-				for (int i = row; i < row + 5; i++) {
-					if (clientGrid[i][column].getOccupant() != null) {
-						System.out.println("There is a ship here already");
-						invalid = true;
-					}
+		} else {
+			for (int i = row; i < row + 5; i++) {
+				if (grid[i][column].getOccupant() != null) {
+					System.out.println("There is a ship here already");
+					invalid = true;
 				}
 			}
 		}
 		}
 		
-		} while (invalid == true);
-		
-		if (player == 1) {
-			serverCarrier = Carrier.getCarrier(row, column, isHorizontal);
+		if (invalid != true) {
+			carrier = Carrier.getCarrier(row, column, isHorizontal);
 			
 			if (isHorizontal == true) {
 				for (int i = column; i < column + 5; i++) {
-					serverGrid[row][i].setOccupant(serverCarrier);
+					grid[row][i].setOccupant(carrier);
 				}
 			} else {
 				for (int i = row; i < row + 5; i++) {
-					serverGrid[i][column].setOccupant(serverCarrier);
-				}
-			}
-		} else if (player == 2) {
-			clientCarrier = Carrier.getCarrier(row, column, isHorizontal);
-			if (isHorizontal == true) {
-				for (int i = 0; i < column + 5; i++) {
-					clientGrid[row][i].setOccupant(clientCarrier);
-				}
-			} else {
-				for (int i = 0; i < row + 5; i++) {
-					clientGrid[i][column].setOccupant(clientCarrier);
+					grid[i][column].setOccupant(carrier);
 				}
 			}
 		}
 	}
 	
-	public void placeBShip(int player) {
-		Scanner input = new Scanner(System.in);
-		boolean invalid;
-		int row;
-		int column;
-		boolean isHorizontal;
+	public void placeBShip(int x, int y, boolean h) {
+		boolean invalid = false;
+		int row = x;
+		int column = y;
+		boolean isHorizontal = h;
 		
-		do {
-		invalid = false;
-		System.out.println("Place the Battleship (4 spaces)");
-		System.out.print("Beginning coordinate row: ");
-		row = input.nextInt();
-		System.out.print("Beginning coordinate column: ");
-		column = input.nextInt();
-		System.out.print("Is the ship horizontal (True or False)? ");
-		isHorizontal = input.nextBoolean();
-		
-		row -= 1;
-		column -= 1;
+		System.out.println("Place the Battleship (4 spaces)");	
 		
 		if (isHorizontal == true && column > 7) {
 			System.out.println("Invalid");
@@ -165,87 +104,49 @@ public class Setup {
 			invalid = true;
 		}
 		
-		if (player == 1) {
-			if (isHorizontal == true) {
-				for (int i = column; i < column + 4; i++) {
-					if (serverGrid[row][i].getOccupant() != null) {
-						System.out.println("There is a ship here already");
-						invalid = true;
-					}
-				}
-			} else {
-				for (int i = row; i < row + 4; i++) {
-					if (serverGrid[i][column].getOccupant() != null) {
-						System.out.println("There is a ship here already");
-						invalid = true;
-					}
+		row -= 1;
+		column -= 1;
+		
+		if (invalid != true) {
+		if (isHorizontal == true) {
+			for (int i = column; i < column + 4; i++) {
+				if (grid[row][i].getOccupant() != null) {
+					System.out.println("There is a ship here already");
+					invalid = true;
 				}
 			}
-		} else if (player == 2) {
-			if (isHorizontal == true) {
-				for (int i = column; i < column + 4; i++) {
-					if (clientGrid[row][i].getOccupant() != null) {
-						System.out.println("There is a ship here already");
-						invalid = true;
-					}
-				}
-			} else {
-				for (int i = row; i < row + 4; i++) {
-					if (clientGrid[i][column].getOccupant() != null) {
-						System.out.println("There is a ship here already");
-						invalid = true;
-					}
+		} else {
+			for (int i = row; i < row + 4; i++) {
+				if (grid[i][column].getOccupant() != null) {
+					System.out.println("There is a ship here already");
+					invalid = true;
 				}
 			}
 		}
+		}
 		
-		} while (invalid == true);
-		
-		if (player == 1) {
-			serverBShip = BShip.getBShip(row, column, isHorizontal);
+		if (invalid != true) {
+			bShip = BShip.getBShip(row, column, isHorizontal);
 			
 			if (isHorizontal == true) {
 				for (int i = column; i < column + 4; i++) {
-					serverGrid[row][i].setOccupant(serverBShip);
+					grid[row][i].setOccupant(bShip);
 				}
 			} else {
 				for (int i = row; i < row + 4; i++) {
-					serverGrid[i][column].setOccupant(serverBShip);
-				}
-			}
-		} else if (player == 2) {
-			clientBShip = BShip.getBShip(row, column, isHorizontal);
-			if (isHorizontal == true) {
-				for (int i = 0; i < column + 4; i++) {
-					clientGrid[row][i].setOccupant(clientBShip);
-				}
-			} else {
-				for (int i = 0; i < row + 4; i++) {
-					clientGrid[i][column].setOccupant(clientBShip);
+					grid[i][column].setOccupant(bShip);
 				}
 			}
 		}
 	}
 	
-	public void placeCruiser(int player) {
-		Scanner input = new Scanner(System.in);
-		boolean invalid;
-		int row;
-		int column;
-		boolean isHorizontal;
+	public void placeCruiser(int x, int y, boolean h) {
+		boolean invalid = false;
+		int row = x;
+		int column = y;
+		boolean isHorizontal = h;
 		
-		do {
-		invalid = false;
-		System.out.println("Place the Cruiser (3 spaces)");
-		System.out.print("Beginning coordinate row: ");
-		row = input.nextInt();
-		System.out.print("Beginning coordinate column: ");
-		column = input.nextInt();
-		System.out.print("Is the ship horizontal (True or False)? ");
-		isHorizontal = input.nextBoolean();
-		
-		row -= 1;
-		column -= 1;
+		System.out.println("Place the Cruiser (3 spaces)");	
 		
 		if (isHorizontal == true && column > 8) {
 			System.out.println("Invalid");
@@ -255,87 +156,49 @@ public class Setup {
 			invalid = true;
 		}
 		
-		if (player == 1) {
-			if (isHorizontal == true) {
-				for (int i = column; i < column + 3; i++) {
-					if (serverGrid[row][i].getOccupant() != null) {
-						System.out.println("There is a ship here already");
-						invalid = true;
-					}
-				}
-			} else {
-				for (int i = row; i < row + 3; i++) {
-					if (serverGrid[i][column].getOccupant() != null) {
-						System.out.println("There is a ship here already");
-						invalid = true;
-					}
+		row -= 1;
+		column -= 1;
+		
+		if (invalid != true) {
+		if (isHorizontal == true) {
+			for (int i = column; i < column + 3; i++) {
+				if (grid[row][i].getOccupant() != null) {
+					System.out.println("There is a ship here already");
+					invalid = true;
 				}
 			}
-		} else if (player == 2) {
-			if (isHorizontal == true) {
-				for (int i = column; i < column + 3; i++) {
-					if (clientGrid[row][i].getOccupant() != null) {
-						System.out.println("There is a ship here already");
-						invalid = true;
-					}
-				}
-			} else {
-				for (int i = row; i < row + 3; i++) {
-					if (clientGrid[i][column].getOccupant() != null) {
-						System.out.println("There is a ship here already");
-						invalid = true;
-					}
+		} else {
+			for (int i = row; i < row + 3; i++) {
+				if (grid[i][column].getOccupant() != null) {
+					System.out.println("There is a ship here already");
+					invalid = true;
 				}
 			}
 		}
+		}
 		
-		} while (invalid == true);
-		
-		if (player == 1) {
-			serverCruiser = Cruiser.getCruiser(row, column, isHorizontal);
+		if (invalid != true) {
+			cruiser = Cruiser.getCruiser(row, column, isHorizontal);
 			
 			if (isHorizontal == true) {
 				for (int i = column; i < column + 3; i++) {
-					serverGrid[row][i].setOccupant(serverCruiser);
+					grid[row][i].setOccupant(cruiser);
 				}
 			} else {
 				for (int i = row; i < row + 3; i++) {
-					serverGrid[i][column].setOccupant(serverCruiser);
-				}
-			}
-		} else if (player == 2) {
-			clientCruiser = Cruiser.getCruiser(row, column, isHorizontal);
-			if (isHorizontal == true) {
-				for (int i = 0; i < column + 3; i++) {
-					clientGrid[row][i].setOccupant(clientCruiser);
-				}
-			} else {
-				for (int i = 0; i < row + 3; i++) {
-					clientGrid[i][column].setOccupant(clientCruiser);
+					grid[i][column].setOccupant(cruiser);
 				}
 			}
 		}
 	}
 	
-	public void placeSubmarine(int player) {
-		Scanner input = new Scanner(System.in);
-		boolean invalid;
-		int row;
-		int column;
-		boolean isHorizontal;
+	public void placeSubmarine(int x, int y, boolean h) {
+		boolean invalid = false;
+		int row = x;
+		int column = y;
+		boolean isHorizontal = h;
 		
-		do {
-		invalid = false;
-		System.out.println("Place the Submarine (3 spaces)");
-		System.out.print("Beginning coordinate row: ");
-		row = input.nextInt();
-		System.out.print("Beginning coordinate column: ");
-		column = input.nextInt();
-		System.out.print("Is the ship horizontal (True or False)? ");
-		isHorizontal = input.nextBoolean();
-		
-		row -= 1;
-		column -= 1;
+		System.out.println("Place the Submarine (3 spaces)");	
 		
 		if (isHorizontal == true && column > 8) {
 			System.out.println("Invalid");
@@ -345,87 +208,49 @@ public class Setup {
 			invalid = true;
 		}
 		
-		if (player == 1) {
-			if (isHorizontal == true) {
-				for (int i = column; i < column + 3; i++) {
-					if (serverGrid[row][i].getOccupant() != null) {
-						System.out.println("There is a ship here already");
-						invalid = true;
-					}
-				}
-			} else {
-				for (int i = row; i < row + 3; i++) {
-					if (serverGrid[i][column].getOccupant() != null) {
-						System.out.println("There is a ship here already");
-						invalid = true;
-					}
+		row -= 1;
+		column -= 1;
+		
+		if (invalid != true) {
+		if (isHorizontal == true) {
+			for (int i = column; i < column + 3; i++) {
+				if (grid[row][i].getOccupant() != null) {
+					System.out.println("There is a ship here already");
+					invalid = true;
 				}
 			}
-		} else if (player == 2) {
-			if (isHorizontal == true) {
-				for (int i = column; i < column + 3; i++) {
-					if (clientGrid[row][i].getOccupant() != null) {
-						System.out.println("There is a ship here already");
-						invalid = true;
-					}
-				}
-			} else {
-				for (int i = row; i < row + 3; i++) {
-					if (clientGrid[i][column].getOccupant() != null) {
-						System.out.println("There is a ship here already");
-						invalid = true;
-					}
+		} else {
+			for (int i = row; i < row + 3; i++) {
+				if (grid[i][column].getOccupant() != null) {
+					System.out.println("There is a ship here already");
+					invalid = true;
 				}
 			}
 		}
+		}
 		
-		} while (invalid == true);
-		
-		if (player == 1) {
-			serverSubmarine = Submarine.getSubmarine(row, column, isHorizontal);
+		if (invalid != true) {
+			submarine = Submarine.getSubmarine(row, column, isHorizontal);
 			
 			if (isHorizontal == true) {
 				for (int i = column; i < column + 3; i++) {
-					serverGrid[row][i].setOccupant(serverSubmarine);
+					grid[row][i].setOccupant(submarine);
 				}
 			} else {
 				for (int i = row; i < row + 3; i++) {
-					serverGrid[i][column].setOccupant(serverSubmarine);
-				}
-			}
-		} else if (player == 2) {
-			clientSubmarine = Submarine.getSubmarine(row, column, isHorizontal);
-			if (isHorizontal == true) {
-				for (int i = 0; i < column + 3; i++) {
-					clientGrid[row][i].setOccupant(clientSubmarine);
-				}
-			} else {
-				for (int i = 0; i < row + 3; i++) {
-					clientGrid[i][column].setOccupant(clientSubmarine);
+					grid[i][column].setOccupant(submarine);
 				}
 			}
 		}
 	}
 	
-	public void placeDestroyer(int player) {
-		Scanner input = new Scanner(System.in);
-		boolean invalid;
-		int row;
-		int column;
-		boolean isHorizontal;
+	public void placeDestroyer(int x, int y, boolean h) {
+		boolean invalid = false;
+		int row = x;
+		int column = y;
+		boolean isHorizontal = h;
 		
-		do {
-		invalid = false;
-		System.out.println("Place the Destroyer (2 spaces)");
-		System.out.print("Beginning coordinate row: ");
-		row = input.nextInt();
-		System.out.print("Beginning coordinate column: ");
-		column = input.nextInt();
-		System.out.print("Is the ship horizontal (True or False)? ");
-		isHorizontal = input.nextBoolean();
-		
-		row -= 1;
-		column -= 1;
+		System.out.println("Place the Destroyer (2 spaces)");	
 		
 		if (isHorizontal == true && column > 9) {
 			System.out.println("Invalid");
@@ -435,63 +260,37 @@ public class Setup {
 			invalid = true;
 		}
 		
-		if (player == 1) {
-			if (isHorizontal == true) {
-				for (int i = column; i < column + 2; i++) {
-					if (serverGrid[row][i].getOccupant() != null) {
-						System.out.println("There is a ship here already");
-						invalid = true;
-					}
-				}
-			} else {
-				for (int i = row; i < row + 2; i++) {
-					if (serverGrid[i][column].getOccupant() != null) {
-						System.out.println("There is a ship here already");
-						invalid = true;
-					}
+		row -= 1;
+		column -= 1;
+		
+		if (invalid != true) {
+		if (isHorizontal == true) {
+			for (int i = column; i < column + 2; i++) {
+				if (grid[row][i].getOccupant() != null) {
+					System.out.println("There is a ship here already");
+					invalid = true;
 				}
 			}
-		} else if (player == 2) {
-			if (isHorizontal == true) {
-				for (int i = column; i < column + 2; i++) {
-					if (clientGrid[row][i].getOccupant() != null) {
-						System.out.println("There is a ship here already");
-						invalid = true;
-					}
-				}
-			} else {
-				for (int i = row; i < row + 2; i++) {
-					if (clientGrid[i][column].getOccupant() != null) {
-						System.out.println("There is a ship here already");
-						invalid = true;
-					}
+		} else {
+			for (int i = row; i < row + 2; i++) {
+				if (grid[i][column].getOccupant() != null) {
+					System.out.println("There is a ship here already");
+					invalid = true;
 				}
 			}
 		}
+		}
 		
-		} while (invalid == true);
-		
-		if (player == 1) {
-			serverDestroyer = Destroyer.getDestroyer(row, column, isHorizontal);
+		if (invalid != true) {
+			destroyer = Destroyer.getDestroyer(row, column, isHorizontal);
 			
 			if (isHorizontal == true) {
 				for (int i = column; i < column + 2; i++) {
-					serverGrid[row][i].setOccupant(serverDestroyer);
+					grid[row][i].setOccupant(destroyer);
 				}
 			} else {
 				for (int i = row; i < row + 2; i++) {
-					serverGrid[i][column].setOccupant(serverDestroyer);
-				}
-			}
-		} else if (player == 2) {
-			clientDestroyer = Destroyer.getDestroyer(row, column, isHorizontal);
-			if (isHorizontal == true) {
-				for (int i = 0; i < column + 2; i++) {
-					clientGrid[row][i].setOccupant(clientDestroyer);
-				}
-			} else {
-				for (int i = 0; i < row + 2; i++) {
-					clientGrid[i][column].setOccupant(clientDestroyer);
+					grid[i][column].setOccupant(destroyer);
 				}
 			}
 		}
