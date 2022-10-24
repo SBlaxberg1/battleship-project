@@ -1,18 +1,12 @@
-import java.util.Scanner;
 
 public class Setup {
 	
 	private Tile[][] grid;
 	private Carrier carrier;
-	private Carrier clientCarrier;
 	private BShip bShip;
-	private BShip clientBShip;
 	private Cruiser cruiser;
-	private Cruiser clientCruiser;
 	private Submarine submarine;
-	private Submarine clientSubmarine;
 	private Destroyer destroyer;
-	private Destroyer clientDestroyer;
 	
 	
 	public Setup() {
