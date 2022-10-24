@@ -12,4 +12,9 @@ public class BattleshipModel
 		begin = new Setup();
 	}
 	
+	public void runSetup()
+	{
+		begin.startGame();
+	}
+	
 }

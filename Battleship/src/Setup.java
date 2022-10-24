@@ -26,8 +26,6 @@ public class Setup {
 				clientGrid[i][j] = new Tile(i, j);
 			}
 		}
-		
-		startGame();
 	}
 	
 public void startGame() {

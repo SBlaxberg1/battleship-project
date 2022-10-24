@@ -21,10 +21,12 @@ public class BattleshipView
 		if (input.equals("-1"))
 		{
 			sGameWindow = new ServerGameWindow();
+			b_model.runSetup();
 			sGameWindow.runServer();
 		} else
 		{
 			cGameWindow = new ClientGameWindow();
+			b_model.runSetup();
 			cGameWindow.runClient(input);
 		}
 		inp.close();
