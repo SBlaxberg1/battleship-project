@@ -162,8 +162,6 @@ public class ServerGameWindow extends GameWindow {
 		    	for (int j=0; j<10; j++) {
 		    		serverGrid[i][j] = new JButton(reticle);
 		    		serverGrid[i][j].setBounds(0, 0, 22, 22);
-		    		
-		    		//TODO: replace with "onClick function"
 		    		final int x = i;
 					final int y = j;
 		    		serverGrid[i][j].addActionListener(new ActionListener() { 

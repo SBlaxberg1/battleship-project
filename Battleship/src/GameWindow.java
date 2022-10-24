@@ -174,5 +174,5 @@ public class GameWindow extends JFrame {
 	  
 	  primaryPanel.add(clientShips);
   }
-
+  
 }
