@@ -88,6 +88,7 @@ public class ClientGameWindow extends GameWindow {
 		   // update connection status
 		   sendData("CLIENT CONNECTED");
 		   windowModel.setGameState(31);
+		   setMessage("Click to place your Carrier.");
 		   
 	      do // process messages sent from server
 	      { 
@@ -216,12 +217,12 @@ public class ClientGameWindow extends GameWindow {
 		   if (windowModel.getGameState() == 2) // CONNECTION PHASE
 		   {
 			   // do nothing, players are connecting
-			   System.out.println("Waiting for players to connect.");
+			   setMessage("Waiting for players to connect.");
 			   
 		   } else if (windowModel.getGameState() == 0) //server's turn
 		   {
 			   // do nothing, it's not your turn
-			   System.out.println("It's not your turn!");
+			   setMessage("It's not your turn!");
 		   
 		   } else if (windowModel.getGameState() == 1) // client's turn
 		   {
@@ -232,7 +233,7 @@ public class ClientGameWindow extends GameWindow {
 		   } else
 		   {
 			   // do nothing
-			   System.out.println("It's not your turn!");
+			   setMessage("It's not your turn!");
 		   }			   
 	   }
 	   
@@ -241,43 +242,43 @@ public class ClientGameWindow extends GameWindow {
 		   if (windowModel.getGameState() == 2)  // SETUP PHASE
 		   {
 			   // do nothing, players are connecting
-			   System.out.println("Waiting for players to connect.");
+			   setMessage("Waiting for players to connect.");
 			   
 		   }
 		   else if (windowModel.getGameState() == 31) //setup - placing carrier
 		   {
 			   // place carrier
-			   System.out.println("You placed your Carrier.");
+			   setMessage("You placed your Carrier. Click on your grid to place your Battleship.");
 			   windowModel.setGameState(32);
 			   
 		   } else if (windowModel.getGameState() == 32) //setup - placing battleship
 		   {
 			   // place battleship
-			   System.out.println("You placed your Battleship.");
+			   setMessage("You placed your Battleship. Click on your grid to place your Cruiser.");
 			   windowModel.setGameState(33);
 			   
 		   } else if (windowModel.getGameState() == 33) //setup - placing cruiser
 		   {
 			   // place cruiser
-			   System.out.println("You placed your Cruiser.");
+			   setMessage("You placed your Cruiser. Click on your grid to place your Submarine.");
 			   windowModel.setGameState(34);
 			   
 		   } else if (windowModel.getGameState() == 34) //setup - placing submarine
 		   {
 			   // place sub
-			   System.out.println("You placed your Submarine.");
+			   setMessage("You placed your Submarine. Click on your grid to place your Destroyer.");
 			   windowModel.setGameState(35);
 			   
 		   } else if (windowModel.getGameState() == 35) //setup - placing destroyer
 		   {
 			   // place destroyer
-			   System.out.println("You placed your Destroyer.");
+			   setMessage("You placed your Destroyer.");
 			   windowModel.setGameState(4);
 		   
 		   } else
 		   {
 			   //nothing
-			   System.out.println("It is not currently the setup phase.");
+			   setMessage("It is not currently the setup phase.");
 		   }
 	   }
 }

@@ -28,6 +28,7 @@ public abstract class GameWindow extends JFrame {
 	JPanel clientShips;
 	JButton[][] serverGrid = new JButton[10][10];
 	JButton[][] clientGrid = new JButton[10][10];
+	JTextArea messages;
 
   public GameWindow() throws IOException{
       startUp();
@@ -125,7 +126,7 @@ public abstract class GameWindow extends JFrame {
 	  info.add(toggle);
 	  JButton auto = new JButton("Auto Place Ships");
 	  info.add(auto);
-	  JTextArea messages = new JTextArea();
+	  messages = new JTextArea();
 	  info.add(messages);
 	  clientShips.add(info);
 	  
@@ -178,6 +179,11 @@ public abstract class GameWindow extends JFrame {
 	  clientShips.add(bottomShips);
 	  
 	  primaryPanel.add(clientShips);
+  }
+  
+  public void setMessage(String m)
+  {
+	  messages.setText(m);
   }
   
 }
