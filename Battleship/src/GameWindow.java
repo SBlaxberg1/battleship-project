@@ -19,7 +19,7 @@ import javax.swing.JTextArea;
 // (View) Creates the Game Window and GUI
 
 @SuppressWarnings("serial")
-public class GameWindow extends JFrame {
+public abstract class GameWindow extends JFrame {
 	JFrame frame;
 	JPanel primaryPanel;
 	JPanel serverPanel;
@@ -47,15 +47,8 @@ public class GameWindow extends JFrame {
 	  frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
   }
 
- public void initEnemyGrid()
- {
-	 
- }
-  
-  public void initPlayerGrid()
-  {
-	  
-  }
+ public abstract void initEnemyGrid();
+ public abstract void initPlayerGrid();
   
   public void initEnemyShips() throws IOException{
 	  serverShips = new JPanel();

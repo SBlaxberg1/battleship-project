@@ -92,12 +92,25 @@ public class ServerGameWindow extends GameWindow {
 	   {
 	      String message = "Connection successful";
 	      sendData( message ); // send connection successful message
-
+	      
+	      if (windowModel.getClientConnected() == true)
+	      {
+	    	  windowModel.setGameState(31);
+	      }
+	      
 	      do // process messages sent from client
 	      { 
 	         try // read message and display it
 	         {
 	            message = ( String ) input.readObject(); // read new message
+	            
+	            // Handling for checking if both players have connected.
+	            if (message.equals("CLIENT>>> CLIENT CONNECTED"))
+	            {
+	            	windowModel.setClientConnected(true);
+	            	windowModel.setGameState(31);
+	            }
+	            
 	            displayMessage( "\n" + message ); // display message
 	         } // end try
 	         catch ( ClassNotFoundException classNotFoundException ) 
@@ -179,7 +192,7 @@ public class ServerGameWindow extends GameWindow {
 		    	}
 		    }
 		    primaryPanel.add(serverPanel);
-		  }
+	   }
 	   
 	   public void initPlayerGrid(){
 			  clientPanel = new JPanel();
@@ -198,6 +211,14 @@ public class ServerGameWindow extends GameWindow {
 				  for (int j=0; j<10; j++) {
 					  clientGrid[i][j] = new JButton(ocean);
 					  clientGrid[i][j].setBounds(0, 0, 22, 22);
+					  final int a = i;
+					  final int b = j;
+					  clientGrid[i][j].addActionListener(new ActionListener() { 
+			    			  public void actionPerformed(ActionEvent e) { 
+			    				  processClickPlayerGrid(a,b);
+			    			  } 
+			    			} );
+			    		
 					  c.gridx = i;
 					  c.gridy = j;
 					  clientPanel.add(clientGrid[i][j], c);
@@ -206,13 +227,13 @@ public class ServerGameWindow extends GameWindow {
 			  primaryPanel.add(clientPanel);
 		  }
 	   
-	   public void processClickEnemyGrid(int x, int y)
+	   private void processClickEnemyGrid(int x, int y)
 	   {
 		   // SETUP PHASE
 		   if (windowModel.getGameState() == 2)
 		   {
 			   // do nothing, game is setting up
-			   System.out.println("It's not your turn!");
+			   System.out.println("Waiting for players to connect.");
 			   
 		   } else if (windowModel.getGameState() == 1) //client turn
 		   {
@@ -232,5 +253,51 @@ public class ServerGameWindow extends GameWindow {
 		   }
 			   
 	   }
+	   
+	   private void processClickPlayerGrid(int x, int y)
+	   {
+		   if (windowModel.getGameState() == 2)  // SETUP PHASE
+		   {
+			   // do nothing, players are connecting
+			   System.out.println("Waiting for players to connect.");
+			   
+		   }
+		   else if (windowModel.getGameState() == 31) //setup - placing carrier
+		   {
+			   // place carrier
+			   System.out.println("You placed your Carrier.");
+			   windowModel.setGameState(32);
+			   
+		   } else if (windowModel.getGameState() == 32) //setup - placing battleship
+		   {
+			   // place battleship
+			   System.out.println("You placed your Battleship.");
+			   windowModel.setGameState(33);
+			   
+		   } else if (windowModel.getGameState() == 33) //setup - placing cruiser
+		   {
+			   // place cruiser
+			   System.out.println("You placed your Cruiser.");
+			   windowModel.setGameState(34);
+			   
+		   } else if (windowModel.getGameState() == 34) //setup - placing submarine
+		   {
+			   // place sub
+			   System.out.println("You placed your Submarine.");
+			   windowModel.setGameState(35);
+			   
+		   } else if (windowModel.getGameState() == 35) //setup - placing destroyer
+		   {
+			   // place destroyer
+			   System.out.println("You placed your Destroyer.");
+			   windowModel.setGameState(4);
+		   } 
+		   else
+		   {
+			   //nothing
+			   System.out.println("It is not currently the setup phase.");
+		   }
+	   }
+	   
 }
 

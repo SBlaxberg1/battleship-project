@@ -2,9 +2,15 @@
 public class GameState {
 
 	private int state; // represents the state of the game.
-	// 0 = Server
-	// 1 = Client
-	// 2 = Setup
+	// 0 = Server's Turn
+	// 1 = Client's Turn
+	// 2 = Awaiting Connection
+	// 31 = Setup - Carrier
+	// 32 = Setup - BShip
+	// 33 = Setup - Cruiser
+	// 34 = Setup - Submarine
+	// 35 = Setup - Destroyer
+	// 4 = Awaiting Other Playing Finishing Placing Ships
 	
 	public GameState(int s)
 	{
