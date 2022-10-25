@@ -1,25 +1,18 @@
 
 public class Setup {
 	
-	private Tile[][] grid;
 	private Carrier carrier;
 	private BShip bShip;
 	private Cruiser cruiser;
 	private Submarine submarine;
 	private Destroyer destroyer;
+	private Tile[][] grid;
 	
-	
-	public Setup() {
-		grid = new Tile[10][10];
-		
-		for (int i=0; i<10; i++) {
-			for (int j=0; j<10; j++) {
-				grid[i][j] = new Tile(i, j);
-			}
-		}
-		
+	public Setup(Tile[][] g) {
+		grid = g;
 	}
 	
+	/*
 	public void startGame() {
 		
 		placeCarrier(1, 1, true);
@@ -29,8 +22,9 @@ public class Setup {
 		placeDestroyer(5, 5, true);
 		
 	}
+	*/
 	
-	public void placeCarrier(int x, int y, boolean h) {
+	public boolean placeCarrier(int x, int y, boolean h) {
 		boolean invalid = false;
 		int row = x;
 		int column = y;
@@ -46,8 +40,8 @@ public class Setup {
 			invalid = true;
 		}
 		
-		row -= 1;
-		column -= 1;
+		//row -= 1;
+		//column -= 1;
 		
 		if (invalid != true) {
 		if (isHorizontal == true) {
@@ -80,9 +74,10 @@ public class Setup {
 				}
 			}
 		}
+		return invalid;
 	}
 	
-	public void placeBShip(int x, int y, boolean h) {
+	public boolean placeBShip(int x, int y, boolean h) {
 		boolean invalid = false;
 		int row = x;
 		int column = y;
@@ -98,8 +93,8 @@ public class Setup {
 			invalid = true;
 		}
 		
-		row -= 1;
-		column -= 1;
+		//row -= 1;
+		//column -= 1;
 		
 		if (invalid != true) {
 		if (isHorizontal == true) {
@@ -132,9 +127,10 @@ public class Setup {
 				}
 			}
 		}
+		return invalid;
 	}
 	
-	public void placeCruiser(int x, int y, boolean h) {
+	public boolean placeCruiser(int x, int y, boolean h) {
 		boolean invalid = false;
 		int row = x;
 		int column = y;
@@ -150,8 +146,8 @@ public class Setup {
 			invalid = true;
 		}
 		
-		row -= 1;
-		column -= 1;
+		//row -= 1;
+		//column -= 1;
 		
 		if (invalid != true) {
 		if (isHorizontal == true) {
@@ -184,9 +180,11 @@ public class Setup {
 				}
 			}
 		}
+		
+		return invalid;
 	}
 	
-	public void placeSubmarine(int x, int y, boolean h) {
+	public boolean placeSubmarine(int x, int y, boolean h) {
 		boolean invalid = false;
 		int row = x;
 		int column = y;
@@ -202,8 +200,8 @@ public class Setup {
 			invalid = true;
 		}
 		
-		row -= 1;
-		column -= 1;
+		//row -= 1;
+		//column -= 1;
 		
 		if (invalid != true) {
 		if (isHorizontal == true) {
@@ -236,9 +234,10 @@ public class Setup {
 				}
 			}
 		}
+		return invalid;
 	}
 	
-	public void placeDestroyer(int x, int y, boolean h) {
+	public boolean placeDestroyer(int x, int y, boolean h) {
 		boolean invalid = false;
 		int row = x;
 		int column = y;
@@ -254,8 +253,8 @@ public class Setup {
 			invalid = true;
 		}
 		
-		row -= 1;
-		column -= 1;
+		//row -= 1;
+		//column -= 1;
 		
 		if (invalid != true) {
 		if (isHorizontal == true) {
@@ -288,5 +287,7 @@ public class Setup {
 				}
 			}
 		}
+		return invalid;
 	}
+	
 }

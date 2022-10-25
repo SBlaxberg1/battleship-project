@@ -10,19 +10,31 @@ public class BattleshipModel
 	private boolean serverReady;
 	private boolean clientReady;
 	
+	private Tile[][] grid;
+	
 	BattleshipModel()
 	{
 		state = new GameState(2); //start game in awaiting connection mode
-		begin = new Setup();
 		serverReady = false;
 		clientReady = false;
 		clientConnected = false;
+		
+		grid = new Tile[10][10];
+		
+		for (int i=0; i<10; i++) {
+			for (int j=0; j<10; j++) {
+				grid[i][j] = new Tile(i, j);
+			}
+		}
+		begin = new Setup(grid);
 	}
 	
+	/*
 	public void runSetup()
 	{
 		begin.startGame();
 	}
+	*/
 	
 	public int getGameState()
 	{
@@ -62,6 +74,11 @@ public class BattleshipModel
 	public void setClientReady(boolean b)
 	{
 		clientReady = b;
+	}
+	
+	public Setup getSetup()
+	{
+		return begin;
 	}
 	
 }

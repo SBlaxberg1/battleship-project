@@ -25,11 +25,12 @@ public class ClientGameWindow extends GameWindow {
 	   private Socket client; // socket to communicate with server
 	   private BattleshipModel windowModel;
 	   
+	   
 	   // initialize chatServer and set up GUI
 	   public ClientGameWindow(BattleshipModel bmod) throws IOException
 	   {
 		   super();
-		   windowModel = bmod;	   
+		   windowModel = bmod;
 	   }
 
 	   // connect to server and process messages from server
@@ -88,7 +89,7 @@ public class ClientGameWindow extends GameWindow {
 		   // update connection status
 		   sendData("CLIENT CONNECTED");
 		   windowModel.setGameState(31);
-		   setMessage("Click to place your Carrier.");
+		   setMessage("Click on your grid to place your Carrier.");
 		   
 	      do // process messages sent from server
 	      { 
@@ -239,6 +240,7 @@ public class ClientGameWindow extends GameWindow {
 	   
 	   private void processClickPlayerGrid(int x, int y)
 	   {
+		   boolean invalidPlacement = true;
 		   if (windowModel.getGameState() == 2)  // SETUP PHASE
 		   {
 			   // do nothing, players are connecting
@@ -248,38 +250,95 @@ public class ClientGameWindow extends GameWindow {
 		   else if (windowModel.getGameState() == 31) //setup - placing carrier
 		   {
 			   // place carrier
-			   setMessage("You placed your Carrier. Click on your grid to place your Battleship.");
-			   windowModel.setGameState(32);
-			   
+			    invalidPlacement = windowModel.getSetup().placeCarrier(x, y, isVertical);
+			   	if (!invalidPlacement)
+			   	{
+			   		setMessage("You placed your Carrier at " + x + "," + y + ". Click on your grid to place your Battleship.");
+			   		setGridIconsShip(x,y,isVertical,5);
+			   		windowModel.setGameState(32);
+			   	} else
+			   	{
+			   		setMessage("Invalid Placement. Please try again.");
+			   	}
+			   	
 		   } else if (windowModel.getGameState() == 32) //setup - placing battleship
 		   {
-			   // place battleship
-			   setMessage("You placed your Battleship. Click on your grid to place your Cruiser.");
-			   windowModel.setGameState(33);
+			   invalidPlacement = windowModel.getSetup().placeBShip(x, y, isVertical);
+			   	if (!invalidPlacement)
+			   	{
+			   		setMessage("You placed your Battleship at " + x + "," + y + ". "
+			   				+ "Click on your grid to place your Cruiser.");
+			   		setGridIconsShip(x,y,isVertical,4);
+			   		windowModel.setGameState(33);
+			   	} else
+			   	{
+			   		setMessage("Invalid Placement. Please try again.");
+			   	}
 			   
 		   } else if (windowModel.getGameState() == 33) //setup - placing cruiser
 		   {
-			   // place cruiser
-			   setMessage("You placed your Cruiser. Click on your grid to place your Submarine.");
-			   windowModel.setGameState(34);
+			   invalidPlacement = windowModel.getSetup().placeCruiser(x, y, isVertical);
+			   	if (!invalidPlacement)
+			   	{
+			   		setMessage("You placed your Cruiser at " + x + "," + y + ". "
+			   				+ "Click on your grid to place your Submarine.");
+			   		setGridIconsShip(x,y,isVertical,3);
+			   		windowModel.setGameState(34);
+			   	} else
+			   	{
+			   		setMessage("Invalid Placement. Please try again.");
+			   	}
 			   
 		   } else if (windowModel.getGameState() == 34) //setup - placing submarine
 		   {
-			   // place sub
-			   setMessage("You placed your Submarine. Click on your grid to place your Destroyer.");
-			   windowModel.setGameState(35);
+			   invalidPlacement = windowModel.getSetup().placeSubmarine(x, y, isVertical);
+			   	if (!invalidPlacement)
+			   	{
+			   		setMessage("You placed your Submarine at " + x + "," + y + ". "
+			   				+ "Click on your grid to place your Destroyer.");
+			   		setGridIconsShip(x,y,isVertical,3);
+			   		windowModel.setGameState(35);
+			   	} else
+			   	{
+			   		setMessage("Invalid Placement. Please try again.");
+			   	}
 			   
 		   } else if (windowModel.getGameState() == 35) //setup - placing destroyer
 		   {
-			   // place destroyer
-			   setMessage("You placed your Destroyer.");
-			   windowModel.setGameState(4);
+			   invalidPlacement = windowModel.getSetup().placeDestroyer(x, y, isVertical);
+			   	if (!invalidPlacement)
+			   	{
+			   		setMessage("You placed your Destroyer at " + x + "," + y + ".");
+			   		setGridIconsShip(x,y,isVertical,2);
+			   		windowModel.setGameState(4);
+			   	} else
+			   	{
+			   		setMessage("Invalid Placement. Please try again.");
+			   	}
 		   
 		   } else
 		   {
 			   //nothing
 			   setMessage("It is not currently the setup phase.");
 		   }
+	   }
+	   
+	   
+	   public void setGridIconsShip(int x, int y, boolean h, int l)
+	   {
+		   ImageIcon shipImg = new ImageIcon("Images/BShip.png");
+			  Image icon = shipImg.getImage();
+			  Image resize = icon.getScaledInstance(22,  22,  java.awt.Image.SCALE_SMOOTH);
+			  shipImg = new ImageIcon(resize);
+		   if (h == true) {
+				for (int i = x; i < x + l; i++) {
+					clientGrid[x][i].setIcon(shipImg);
+				}
+			} else {
+				for (int i = x; i < x + l; i++) {
+					clientGrid[i][y].setIcon(shipImg);
+				}
+			}
 	   }
 }
 

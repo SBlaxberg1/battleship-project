@@ -3,6 +3,8 @@
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -33,6 +35,7 @@ public abstract class GameWindow extends JFrame {
 	JButton[][] serverGrid = new JButton[10][10];
 	JButton[][] clientGrid = new JButton[10][10];
 	JTextArea messages;
+	protected boolean isVertical = true;
 
   public GameWindow() throws IOException{
       startUp();
@@ -121,7 +124,22 @@ public abstract class GameWindow extends JFrame {
 	  
 	  JPanel info = new JPanel();
 	  info.setLayout(new GridLayout(1, 3));
-	  JButton toggle = new JButton("Toggle Ship Orientation");
+	  JButton toggle = new JButton("Toggle (Vertical)");
+	  
+	  toggle.addActionListener(new ActionListener() { 
+		  public void actionPerformed(ActionEvent e) { 
+			  if (isVertical)
+			  {
+				  isVertical = false;
+				  toggle.setText("Toggle (Horizontal)");
+			  } else
+			  {
+				  isVertical = true;
+				  toggle.setText("Toggle (Vertical)");
+			  }
+		  } 
+		} );
+	  
 	  info.add(toggle);
 	  JButton auto = new JButton("Auto Place Ships");
 	  info.add(auto);
