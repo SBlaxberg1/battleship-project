@@ -114,8 +114,20 @@ public abstract class GameWindow extends JFrame {
 	  clientShips.setLayout(new GridLayout(3, 1));
 	  clientShips.setBorder(BorderFactory.createLineBorder(Color.blue));
 	  
+	  /*
 	  JTextArea friendlyRemaining = new JTextArea("Friendly ships remaining:");
 	  clientShips.add(friendlyRemaining);
+	  */
+	  
+	  JPanel info = new JPanel();
+	  info.setLayout(new GridLayout(1, 3));
+	  JButton toggle = new JButton("Toggle Ship Orientation");
+	  info.add(toggle);
+	  JButton auto = new JButton("Auto Place Ships");
+	  info.add(auto);
+	  JTextArea messages = new JTextArea();
+	  info.add(messages);
+	  clientShips.add(info);
 	  
 	  JPanel topShips = new JPanel();
 	  topShips.setLayout(new GridLayout(1, 3));
