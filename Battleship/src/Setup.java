@@ -32,10 +32,10 @@ public class Setup {
 		
 		System.out.println("Place the Carrier (5 spaces)");	
 		
-		if (isHorizontal == true && column > 6) {
+		if (isHorizontal == true && column >= 6) {
 			System.out.println("Invalid");
 			invalid = true;
-		} else if (isHorizontal == false && row > 6){
+		} else if (isHorizontal == false && row >= 6){
 			System.out.println("Invalid");
 			invalid = true;
 		}
@@ -85,10 +85,10 @@ public class Setup {
 		
 		System.out.println("Place the Battleship (4 spaces)");	
 		
-		if (isHorizontal == true && column > 7) {
+		if (isHorizontal == true && column >= 7) {
 			System.out.println("Invalid");
 			invalid = true;
-		} else if (isHorizontal == false && row > 7){
+		} else if (isHorizontal == false && row >= 7){
 			System.out.println("Invalid");
 			invalid = true;
 		}
@@ -138,10 +138,10 @@ public class Setup {
 		
 		System.out.println("Place the Cruiser (3 spaces)");	
 		
-		if (isHorizontal == true && column > 8) {
+		if (isHorizontal == true && column >= 8) {
 			System.out.println("Invalid");
 			invalid = true;
-		} else if (isHorizontal == false && row > 8){
+		} else if (isHorizontal == false && row >= 8){
 			System.out.println("Invalid");
 			invalid = true;
 		}
@@ -192,10 +192,10 @@ public class Setup {
 		
 		System.out.println("Place the Submarine (3 spaces)");	
 		
-		if (isHorizontal == true && column > 8) {
+		if (isHorizontal == true && column >= 8) {
 			System.out.println("Invalid");
 			invalid = true;
-		} else if (isHorizontal == false && row > 8){
+		} else if (isHorizontal == false && row >= 8){
 			System.out.println("Invalid");
 			invalid = true;
 		}
@@ -245,10 +245,10 @@ public class Setup {
 		
 		System.out.println("Place the Destroyer (2 spaces)");	
 		
-		if (isHorizontal == true && column > 9) {
+		if (isHorizontal == true && column >= 9) {
 			System.out.println("Invalid");
 			invalid = true;
-		} else if (isHorizontal == false && row > 9){
+		} else if (isHorizontal == false && row >= 9){
 			System.out.println("Invalid");
 			invalid = true;
 		}
