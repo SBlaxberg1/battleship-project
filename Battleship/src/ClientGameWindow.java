@@ -99,9 +99,9 @@ public class ClientGameWindow extends GameWindow {
 	            
 	            if (message.equals("SERVER>>> SERVER READY"))
 	            {
+	            	windowModel.setServerReady(true);
 	            	if (windowModel.getClientReady())
 	            	{
-		            	windowModel.setServerReady(true);
 		            	windowModel.setGameState(0);
 		            	setMessage("Awaiting enemy move.");
 	            	}

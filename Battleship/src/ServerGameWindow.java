@@ -113,9 +113,9 @@ public class ServerGameWindow extends GameWindow {
 	            }
 	            if (message.equals("CLIENT>>> CLIENT READY"))
 	            {
+            		windowModel.setClientReady(true);
 	            	if(windowModel.getServerReady())
 	            	{
-	            		windowModel.setClientReady(true);
 	            		windowModel.setGameState(0);
 	            		setMessage("Click on your enemy's grid to fire a shot.");
 	            	}
