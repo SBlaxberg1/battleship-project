@@ -281,7 +281,7 @@ public class ServerGameWindow extends GameWindow {
 			   	{
 			   		setMessage("You placed your Carrier at " + x + "," + y + ". "
 			   				+ "Click on your grid to place your Battleship (Length: 4).");
-			   		setGridIconsShip(x,y,isVertical,5);
+			   		setGridIconsShip(x,y,isVertical,5,"Images/Carrier.png");
 			   		windowModel.setGameState(32);
 			   	} else
 			   	{
@@ -295,7 +295,7 @@ public class ServerGameWindow extends GameWindow {
 			   	{
 			   		setMessage("You placed your Battleship at " + x + "," + y + ". "
 			   				+ "Click on your grid to place your Cruiser. (Length: 3)");
-			   		setGridIconsShip(x,y,isVertical,4);
+			   		setGridIconsShip(x,y,isVertical,4,"Images/BShip.png");
 			   		windowModel.setGameState(33);
 			   	} else
 			   	{
@@ -309,7 +309,7 @@ public class ServerGameWindow extends GameWindow {
 			   	{
 			   		setMessage("You placed your Cruiser at " + x + "," + y + ". "
 			   				+ "Click on your grid to place your Submarine. (Length: 3)");
-			   		setGridIconsShip(x,y,isVertical,3);
+			   		setGridIconsShip(x,y,isVertical,3,"Images/Cruiser.png");
 			   		windowModel.setGameState(34);
 			   	} else
 			   	{
@@ -323,7 +323,7 @@ public class ServerGameWindow extends GameWindow {
 			   	{
 			   		setMessage("You placed your Submarine at " + x + "," + y + ". "
 			   				+ "Click on your grid to place your Destroyer. (Length: 2)");
-			   		setGridIconsShip(x,y,isVertical,3);
+			   		setGridIconsShip(x,y,isVertical,3,"Images/Submarine.png");
 			   		windowModel.setGameState(35);
 			   	} else
 			   	{
@@ -336,7 +336,7 @@ public class ServerGameWindow extends GameWindow {
 			   	if (!invalidPlacement)
 			   	{
 			   		setMessage("You placed your Destroyer at " + x + "," + y + ".");
-			   		setGridIconsShip(x,y,isVertical,2);
+			   		setGridIconsShip(x,y,isVertical,2,"Images/Destroyer.png");
 			   		windowModel.setGameState(4);
 			   		
 			   		windowModel.setServerReady(true);
@@ -360,9 +360,9 @@ public class ServerGameWindow extends GameWindow {
 	   }
 	   
 	   
-	   public void setGridIconsShip(int x, int y, boolean h, int l)
+	   public void setGridIconsShip(int x, int y, boolean h, int l, String imgPath)
 	   {
-		   ImageIcon shipImg = new ImageIcon("Images/BShip.png");
+		   ImageIcon shipImg = new ImageIcon(imgPath);
 		   Image icon = shipImg.getImage();
 		   Image resize = icon.getScaledInstance(22,  22,  java.awt.Image.SCALE_SMOOTH);
 		   shipImg = new ImageIcon(resize);
