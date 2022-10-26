@@ -270,7 +270,9 @@ public class ServerGameWindow extends GameWindow {
 			    invalidPlacement = windowModel.getSetup().placeCarrier(x, y, isVertical);
 			   	if (!invalidPlacement)
 			   	{
-			   		setMessage("You placed your Carrier at " + x + "," + y + ". Click on your grid to place your Battleship.");
+			   		setMessage("You placed your Carrier at " + x + "," + y + ". "
+			   				+ "Click on your grid to place your Battleship (Length: 4).");
+			   		setGridIconsShip(x,y,isVertical,5);
 			   		windowModel.setGameState(32);
 			   	} else
 			   	{
@@ -283,7 +285,8 @@ public class ServerGameWindow extends GameWindow {
 			   	if (!invalidPlacement)
 			   	{
 			   		setMessage("You placed your Battleship at " + x + "," + y + ". "
-			   				+ "Click on your grid to place your Cruiser.");
+			   				+ "Click on your grid to place your Cruiser. (Length: 3)");
+			   		setGridIconsShip(x,y,isVertical,4);
 			   		windowModel.setGameState(33);
 			   	} else
 			   	{
@@ -296,7 +299,8 @@ public class ServerGameWindow extends GameWindow {
 			   	if (!invalidPlacement)
 			   	{
 			   		setMessage("You placed your Cruiser at " + x + "," + y + ". "
-			   				+ "Click on your grid to place your Submarine.");
+			   				+ "Click on your grid to place your Submarine. (Length: 3)");
+			   		setGridIconsShip(x,y,isVertical,3);
 			   		windowModel.setGameState(34);
 			   	} else
 			   	{
@@ -309,7 +313,8 @@ public class ServerGameWindow extends GameWindow {
 			   	if (!invalidPlacement)
 			   	{
 			   		setMessage("You placed your Submarine at " + x + "," + y + ". "
-			   				+ "Click on your grid to place your Destroyer.");
+			   				+ "Click on your grid to place your Destroyer. (Length: 2)");
+			   		setGridIconsShip(x,y,isVertical,3);
 			   		windowModel.setGameState(35);
 			   	} else
 			   	{
@@ -322,6 +327,7 @@ public class ServerGameWindow extends GameWindow {
 			   	if (!invalidPlacement)
 			   	{
 			   		setMessage("You placed your Destroyer at " + x + "," + y + ".");
+			   		setGridIconsShip(x,y,isVertical,2);
 			   		windowModel.setGameState(4);
 			   	} else
 			   	{
@@ -335,5 +341,22 @@ public class ServerGameWindow extends GameWindow {
 		   }
 	   }
 	   
+	   
+	   public void setGridIconsShip(int x, int y, boolean h, int l)
+	   {
+		   ImageIcon shipImg = new ImageIcon("Images/BShip.png");
+		   Image icon = shipImg.getImage();
+		   Image resize = icon.getScaledInstance(22,  22,  java.awt.Image.SCALE_SMOOTH);
+		   shipImg = new ImageIcon(resize);
+		   
+		   if (h == true) {
+				for (int i = y; i < y + l; i++) {
+					clientGrid[x][i].setIcon(shipImg);
+				}
+			} else {
+				for (int i = x; i < x + l; i++) {
+					clientGrid[i][y].setIcon(shipImg);
+				}
+			}
+	   }
 }
-
