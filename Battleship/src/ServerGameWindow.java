@@ -25,6 +25,8 @@ public class ServerGameWindow extends GameWindow {
 	   private Socket connection; // connection to client
 	   private int counter = 1; // counter of number of connections
 	   private BattleshipModel windowModel;
+	   private int netCordsX = -1;
+	   private int netCordsY = -1;
 
 	   public ServerGameWindow(BattleshipModel bmod) throws IOException
 	   {
@@ -121,6 +123,57 @@ public class ServerGameWindow extends GameWindow {
 	            	}
 	            }
 	            
+	         // Receive shot
+	            if (message.length() == 2)
+	            {
+	            	int coords = Integer.parseInt(message);
+	            	int x = coords / 10;
+	            	int y = coords % 10;
+	            	String didHit = windowModel.receiveShot(x, y);
+	            	if (didHit.equals("hit"))
+	            	{
+	            		ImageIcon shipImg = new ImageIcon("Images/hit.png");
+	 				   Image icon = shipImg.getImage();
+	 				   Image resize = icon.getScaledInstance(22,  22,  java.awt.Image.SCALE_SMOOTH);
+	 				   shipImg = new ImageIcon(resize);
+	            		clientGrid[x][y].setIcon(shipImg);
+	            		setMessage("Enemy shot at " + x + " , " + y + " and hit!");
+	            	} else
+	            	{
+	            		ImageIcon shipImg = new ImageIcon("Images/miss.png");
+		 				   Image icon = shipImg.getImage();
+		 				   Image resize = icon.getScaledInstance(22,  22,  java.awt.Image.SCALE_SMOOTH);
+		 				   shipImg = new ImageIcon(resize);
+		            		clientGrid[x][y].setIcon(shipImg);
+		            		setMessage("Enemy shot at " + x + " , " + y + " and missed!");
+	            	}
+	            	sendResult(didHit);
+	            	windowModel.setGameState(0);
+	            	setMessage("Your turn. Click on the enemy's grid to fire a shot.");
+	            }
+	            
+	            // Return confirmation of hit or miss
+	            if (message.equals("hit"))
+	            {
+	            	setMessage("Hit!");
+	            	ImageIcon shipImg = new ImageIcon("Images/hit.png");
+					   Image icon = shipImg.getImage();
+					   Image resize = icon.getScaledInstance(22,  22,  java.awt.Image.SCALE_SMOOTH);
+					   shipImg = new ImageIcon(resize);
+				      serverGrid[netCordsX][netCordsY].setIcon(shipImg);
+				      setMessage("Awaiting enemy move.");
+	            }
+	            if (message.equals("miss"))
+	            {
+	            	setMessage("Miss!");
+	            	ImageIcon shipImg = new ImageIcon("Images/miss.png");
+					   Image icon = shipImg.getImage();
+					   Image resize = icon.getScaledInstance(22,  22,  java.awt.Image.SCALE_SMOOTH);
+					   shipImg = new ImageIcon(resize);
+				      serverGrid[netCordsX][netCordsY].setIcon(shipImg);
+				      setMessage("Awaiting enemy move.");
+	            }
+	            
 	            displayMessage( "\n" + message ); // display message
 	         } // end try
 	         catch ( ClassNotFoundException classNotFoundException ) 
@@ -161,8 +214,36 @@ public class ServerGameWindow extends GameWindow {
 	      {
 	         displayMessage( "\nError writing object" );
 	      } // end catch
-	   } // end method sendData
+	   }
 
+	   private void sendHit(String coords)
+	   {
+	      try // send object to client
+	      {
+	         output.writeObject(coords);
+	         output.flush(); // flush output to client
+	         displayMessage( "\nSERVER>>> " + coords );
+	      } // end try
+	      catch ( IOException ioException ) 
+	      {
+	         displayMessage( "\nError writing object" );
+	      } // end catch
+	   }
+	   
+	   public void sendResult(String hitOrMiss)
+	   {
+	      try // send object to client
+	      {
+	         output.writeObject(hitOrMiss);
+	         output.flush(); // flush data to output
+	         displayMessage( "\nSERVER>>> " + hitOrMiss);
+	      } // end try
+	      catch ( IOException ioException )
+	      {
+	         displayMessage( "\nError writing object" );
+	      } // end catch
+	   } // end method sendData
+	   
 	   // manipulates displayArea in the event-dispatch thread
 	   private void displayMessage( final String messageToDisplay )
 	   {
@@ -253,9 +334,12 @@ public class ServerGameWindow extends GameWindow {
 		   } else if (windowModel.getGameState() == 0) // server turn
 		   {
 			   // send shot to opponent
-			   // TODO: This should return something to indicate hit or miss
-			   sendData("" + x + y); 
-		   
+			   setMessage("Fired shot at " + x + " , " + y + ".");
+			   netCordsX = x;
+			   netCordsY = y;
+			   sendHit("" + x + y);
+			   windowModel.setGameState(1);
+				   
 		   } else
 		   {
 			   // do nothing

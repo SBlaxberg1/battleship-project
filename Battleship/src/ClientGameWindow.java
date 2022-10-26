@@ -24,6 +24,8 @@ public class ClientGameWindow extends GameWindow {
 	   private String message = ""; // message from server
 	   private Socket client; // socket to communicate with server
 	   private BattleshipModel windowModel;
+	   private int netCordsX = -1;
+	   private int netCordsY = -1;
 	   
 	   
 	   // initialize chatServer and set up GUI
@@ -97,6 +99,7 @@ public class ClientGameWindow extends GameWindow {
 	         {
 	            message = ( String ) input.readObject(); // read new message	
 	            
+	            // While in waiting room
 	            if (message.equals("SERVER>>> SERVER READY"))
 	            {
 	            	windowModel.setServerReady(true);
@@ -106,6 +109,57 @@ public class ClientGameWindow extends GameWindow {
 		            	setMessage("Awaiting enemy move.");
 	            	}
             	}
+	            
+	            // Receive shot
+	            if (message.length() == 2)
+	            {
+	            	int coords = Integer.parseInt(message);
+	            	int x = coords / 10;
+	            	int y = coords % 10;
+	            	String didHit = windowModel.receiveShot(x, y);
+	            	if (didHit.equals("hit"))
+	            	{
+	            		ImageIcon shipImg = new ImageIcon("Images/hit.png");
+	 				   Image icon = shipImg.getImage();
+	 				   Image resize = icon.getScaledInstance(22,  22,  java.awt.Image.SCALE_SMOOTH);
+	 				   shipImg = new ImageIcon(resize);
+	            	   clientGrid[x][y].setIcon(shipImg);
+	            	   setMessage("Enemy shot at " + x + " , " + y + " and hit!");
+	            	} else
+	            	{
+	            		ImageIcon shipImg = new ImageIcon("Images/miss.png");
+		 				   Image icon = shipImg.getImage();
+		 				   Image resize = icon.getScaledInstance(22,  22,  java.awt.Image.SCALE_SMOOTH);
+		 				   shipImg = new ImageIcon(resize);
+		            		clientGrid[x][y].setIcon(shipImg);
+		            		setMessage("Enemy shot at " + x + " , " + y + " and missed!");
+	            	}
+	            	sendResult(didHit);
+	            	windowModel.setGameState(1);
+	            	setMessage("Your turn. Click on the enemy's grid to fire a shot.");
+	            }
+	            
+	         // Return confirmation of hit or miss
+	            if (message.equals("hit"))
+	            {
+	            	setMessage("Hit!");
+	            	ImageIcon shipImg = new ImageIcon("Images/hit.png");
+					   Image icon = shipImg.getImage();
+					   Image resize = icon.getScaledInstance(22,  22,  java.awt.Image.SCALE_SMOOTH);
+					   shipImg = new ImageIcon(resize);
+				      serverGrid[netCordsX][netCordsY].setIcon(shipImg);
+				      setMessage("Awaiting enemy move.");
+	            }
+	            if (message.equals("miss"))
+	            {
+	            	setMessage("Miss!");
+	            	ImageIcon shipImg = new ImageIcon("Images/miss.png");
+					   Image icon = shipImg.getImage();
+					   Image resize = icon.getScaledInstance(22,  22,  java.awt.Image.SCALE_SMOOTH);
+					   shipImg = new ImageIcon(resize);
+				      serverGrid[netCordsX][netCordsY].setIcon(shipImg);
+				      setMessage("Awaiting enemy move.");
+	            }
 	            
 	            displayMessage( "\n" + message ); // display message
 	         } // end try
@@ -154,6 +208,34 @@ public class ClientGameWindow extends GameWindow {
 	   {
 	      System.out.println(messageToDisplay);
 	   } // end method displayMessage
+	   
+	   private void sendHit(String coords)
+	   {
+	      try // send object to server
+	      {
+	         output.writeObject(coords);
+	         output.flush(); // flush output to client
+	         displayMessage( "\nCLIENT>>> " + coords );
+	      } // end try
+	      catch ( IOException ioException ) 
+	      {
+	         displayMessage( "\nError writing object" );
+	      } // end catch
+	   }
+	   
+	   public void sendResult(String hitOrMiss)
+	   {
+	      try // send object to server
+	      {
+	         output.writeObject(hitOrMiss);
+	         output.flush(); // flush data to output
+	         displayMessage( "\nCLIENT>>> " + hitOrMiss);
+	      } // end try
+	      catch ( IOException ioException )
+	      {
+	         displayMessage( "\nError writing object" );
+	      } // end catch
+	   } // end method sendData
 	   
 	   public void initEnemyGrid() {
 			  
@@ -239,8 +321,11 @@ public class ClientGameWindow extends GameWindow {
 		   } else if (windowModel.getGameState() == 1) // client's turn
 		   {
 			   // send shot to opponent
-			   // TODO: This should return something to indicate hit or miss
-			   sendData("" + x + y); 
+			   setMessage("Fired shot at " + x + " , " + y + ".");
+			   netCordsX = x;
+			   netCordsY = y;
+			   sendHit("" + x + y);
+			   windowModel.setGameState(0);
 		   
 		   } else
 		   {

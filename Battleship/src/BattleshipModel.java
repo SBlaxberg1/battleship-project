@@ -81,12 +81,12 @@ public class BattleshipModel
 		return begin;
 	}
 	
-	public boolean receiveShot (int x, int y) {
+	public String receiveShot (int x, int y) {
 		if (grid[x][y].getOccupant() instanceof Ship) {
 			grid[x][y].getOccupant().takeHit();
-			return true;
+			return "hit";
 		} else {
-			return false;
+			return "miss";
 		}
 	}
 	
