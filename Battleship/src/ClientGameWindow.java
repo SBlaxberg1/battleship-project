@@ -331,12 +331,12 @@ public class ClientGameWindow extends GameWindow {
 			  Image resize = icon.getScaledInstance(22,  22,  java.awt.Image.SCALE_SMOOTH);
 			  shipImg = new ImageIcon(resize);
 		   if (h == true) {
-				for (int i = x; i < x + l; i++) {
-					clientGrid[x][i].setIcon(shipImg);
+				for (int i = y; i < y + l; i++) {
+					clientGrid[y][i].setIcon(shipImg);
 				}
 			} else {
 				for (int i = x; i < x + l; i++) {
-					clientGrid[i][y].setIcon(shipImg);
+					clientGrid[i][x].setIcon(shipImg);
 				}
 			}
 	   }
