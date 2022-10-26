@@ -95,7 +95,18 @@ public class ClientGameWindow extends GameWindow {
 	      { 
 	         try // read message and display it
 	         {
-	            message = ( String ) input.readObject(); // read new message	            
+	            message = ( String ) input.readObject(); // read new message	
+	            
+	            if (message.equals("SERVER>>> SERVER READY"))
+	            {
+	            	if (windowModel.getClientReady())
+	            	{
+		            	windowModel.setServerReady(true);
+		            	windowModel.setGameState(0);
+		            	setMessage("Awaiting enemy move.");
+	            	}
+            	}
+	            
 	            displayMessage( "\n" + message ); // display message
 	         } // end try
 	         catch ( ClassNotFoundException classNotFoundException ) 
@@ -312,6 +323,15 @@ public class ClientGameWindow extends GameWindow {
 			   		setMessage("You placed your Destroyer at " + x + "," + y + ".");
 			   		setGridIconsShip(x,y,isVertical,2);
 			   		windowModel.setGameState(4);
+			   		
+			   		windowModel.setClientReady(true);
+			   		sendData("CLIENT READY");
+			   		if (windowModel.getServerReady())
+			   		{
+			   			windowModel.setGameState(0);
+			   			setMessage("Awaiting enemy move.");
+			   		}
+			   		
 			   	} else
 			   	{
 			   		setMessage("Invalid Placement. Please try again.");

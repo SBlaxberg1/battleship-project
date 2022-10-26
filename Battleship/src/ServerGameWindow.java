@@ -109,7 +109,16 @@ public class ServerGameWindow extends GameWindow {
 	            {
 	            	windowModel.setClientConnected(true);
 	            	windowModel.setGameState(31);
-	            	setMessage("Click on your grid to place your Carrier.");
+	            	setMessage("Click on your grid to place your Carrier (Length: 5).");
+	            }
+	            if (message.equals("CLIENT>>> CLIENT READY"))
+	            {
+	            	if(windowModel.getServerReady())
+	            	{
+	            		windowModel.setClientReady(true);
+	            		windowModel.setGameState(0);
+	            		setMessage("Click on your enemy's grid to fire a shot.");
+	            	}
 	            }
 	            
 	            displayMessage( "\n" + message ); // display message
@@ -329,6 +338,15 @@ public class ServerGameWindow extends GameWindow {
 			   		setMessage("You placed your Destroyer at " + x + "," + y + ".");
 			   		setGridIconsShip(x,y,isVertical,2);
 			   		windowModel.setGameState(4);
+			   		
+			   		windowModel.setServerReady(true);
+			   		sendData("SERVER READY");
+			   		if (windowModel.getClientReady())
+			   		{
+			   			windowModel.setGameState(0);
+			   			setMessage("Click on your enemy's grid to fire a shot.");
+			   		}
+			   		
 			   	} else
 			   	{
 			   		setMessage("Invalid Placement. Please try again.");
