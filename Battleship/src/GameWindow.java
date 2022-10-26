@@ -16,8 +16,10 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextPane;
+import javax.swing.text.DefaultCaret;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
@@ -64,6 +66,7 @@ public abstract class GameWindow extends JFrame {
 	  serverShips.setBorder(BorderFactory.createLineBorder(Color.red));
 	  
 	  JTextArea enemyRemaining = new JTextArea("Enemy ships remaining:");
+	  enemyRemaining.setEditable(false);
 	  serverShips.add(enemyRemaining);
 	  
 	  JPanel topShips = new JPanel();
@@ -145,9 +148,17 @@ public abstract class GameWindow extends JFrame {
 	  info.add(auto);
 	  
 	  messages = new JTextArea();
+	  DefaultCaret caret = (DefaultCaret)messages.getCaret();
+	  caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
+	  messages.setEditable(false);
 	  messages.setLineWrap(true);
 	  messages.setWrapStyleWord(true);
-	  info.add(messages);
+	  
+	  JScrollPane scroll = new JScrollPane(messages);
+	  scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+	  scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+	  info.add(scroll);
+	  
 	  clientShips.add(info);
 	  
 	  JPanel topShips = new JPanel();
@@ -203,7 +214,7 @@ public abstract class GameWindow extends JFrame {
   
   public void setMessage(String m)
   {
-	  messages.setText(m);
+	  messages.append("- " + m + "\n");
   }
   
 }

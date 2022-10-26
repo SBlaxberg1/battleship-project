@@ -345,6 +345,9 @@ public class ServerGameWindow extends GameWindow {
 			   		{
 			   			windowModel.setGameState(0);
 			   			setMessage("Click on your enemy's grid to fire a shot.");
+			   		} else
+			   		{
+			   			setMessage("Waiting for opponent to finish placing ships.");
 			   		}
 			   		
 			   	} else

@@ -330,6 +330,9 @@ public class ClientGameWindow extends GameWindow {
 			   		{
 			   			windowModel.setGameState(0);
 			   			setMessage("Awaiting enemy move.");
+			   		} else
+			   		{
+			   			setMessage("Waiting for opponent to finish placing ships.");
 			   		}
 			   		
 			   	} else
