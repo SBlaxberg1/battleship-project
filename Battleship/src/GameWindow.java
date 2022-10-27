@@ -37,7 +37,7 @@ public abstract class GameWindow extends JFrame {
 	JButton[][] serverGrid = new JButton[10][10];
 	JButton[][] clientGrid = new JButton[10][10];
 	JTextArea messages;
-	protected boolean isVertical = true;
+	protected boolean isVertical = false;
 
   public GameWindow() throws IOException{
       startUp();
@@ -127,18 +127,18 @@ public abstract class GameWindow extends JFrame {
 	  
 	  JPanel info = new JPanel();
 	  info.setLayout(new GridLayout(1, 3));
-	  JButton toggle = new JButton("Toggle (Vertical)");
+	  JButton toggle = new JButton("Toggle (Currently Horizontal)");
 	  
 	  toggle.addActionListener(new ActionListener() { 
 		  public void actionPerformed(ActionEvent e) { 
 			  if (isVertical)
 			  {
 				  isVertical = false;
-				  toggle.setText("Toggle (Horizontal)");
+				  toggle.setText("Toggle (Currently Horizontal)");
 			  } else
 			  {
 				  isVertical = true;
-				  toggle.setText("Toggle (Vertical)");
+				  toggle.setText("Toggle (Currently Vertical)");
 			  }
 		  } 
 		} );
