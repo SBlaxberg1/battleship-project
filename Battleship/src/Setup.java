@@ -1,5 +1,3 @@
-import java.util.Random;
-
 public class Setup {
 	
 	private Carrier carrier;
@@ -11,85 +9,6 @@ public class Setup {
 	
 	public Setup(Tile[][] g) {
 		grid = g;
-	}
-	
-	public void autoPlace() {
-		Random rand = new Random();
-		boolean orient;
-		boolean invalid;
-		int x;
-		int y;
-		int h;
-		
-		do {
-		x = rand.nextInt(10);
-		y = rand.nextInt(10);
-		h = rand.nextInt(2);
-		if (h == 0)
-			orient = true;
-		else
-			orient = false;
-		
-		invalid = placeCarrier(x, y, orient);
-		
-		}while (invalid);
-		
-		
-		do {
-			x = rand.nextInt(10);
-			y = rand.nextInt(10);
-			h = rand.nextInt(2);
-			if (h == 0)
-				orient = true;
-			else
-				orient = false;
-			
-			invalid = placeBShip(x, y, orient);
-			
-			}while (invalid);
-		
-		
-		do {
-			x = rand.nextInt(10);
-			y = rand.nextInt(10);
-			h = rand.nextInt(2);
-			if (h == 0)
-				orient = true;
-			else
-				orient = false;
-			
-			invalid = placeCruiser(x, y, orient);
-			
-			}while (invalid);
-		
-		
-		do {
-			x = rand.nextInt(10);
-			y = rand.nextInt(10);
-			h = rand.nextInt(2);
-			if (h == 0)
-				orient = true;
-			else
-				orient = false;
-			
-			invalid = placeSubmarine(x, y, orient);
-			
-			}while (invalid);
-		
-		
-		do {
-			x = rand.nextInt(10);
-			y = rand.nextInt(10);
-			h = rand.nextInt(2);
-			if (h == 0)
-				orient = true;
-			else
-				orient = false;
-			
-			invalid = placeDestroyer(x, y, orient);
-			
-			}while (invalid);
-		
 	}
 	
 	public boolean placeCarrier(int x, int y, boolean h) {

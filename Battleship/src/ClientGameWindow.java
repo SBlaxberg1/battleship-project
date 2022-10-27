@@ -10,6 +10,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.InetAddress;
 import java.net.Socket;
+import java.util.Random;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -363,7 +364,7 @@ public class ClientGameWindow extends GameWindow {
 		   } else if (windowModel.getGameState() == 1) // client's turn
 		   {
 			   // send shot to opponent
-			   setMessage("Fired shot at " + x + " , " + y + ".");
+			   setMessage("Fired shot at " + x + ", " + y + ".");
 			   netCordsX = x;
 			   netCordsY = y;
 			   sendHit("" + x + y);
@@ -492,5 +493,108 @@ public class ClientGameWindow extends GameWindow {
 				}
 			}
 	   }
+	   
+	   public void autoPlace() {
+		   if (windowModel.getGameState() == 31)
+		   {
+		    auto.setEnabled(false);
+			Random rand = new Random();
+			boolean orient;
+			boolean invalid;
+			int x;
+			int y;
+			int h;
+			
+			do {
+			x = rand.nextInt(10);
+			y = rand.nextInt(10);
+			h = rand.nextInt(2);
+			if (h == 0)
+				orient = true;
+			else
+				orient = false;
+			
+			invalid = windowModel.getSetup().placeCarrier(x, y, orient);
+			
+			}while (invalid);
+			setMessage("Autoplace placed your Carrier at " + x + "," + y + ".");
+	   		setGridIconsShip(x,y,isVertical,5,"Images/Carrier.png");
+	   		windowModel.setGameState(32);
+			
+			do {
+				x = rand.nextInt(10);
+				y = rand.nextInt(10);
+				h = rand.nextInt(2);
+				if (h == 0)
+					orient = true;
+				else
+					orient = false;
+				
+				invalid = windowModel.getSetup().placeBShip(x, y, orient);
+				
+				}while (invalid);
+			setMessage("Autoplace placed your Battleship at " + x + "," + y + ".");
+	   		setGridIconsShip(x,y,isVertical,5,"Images/BShip.png");
+	   		windowModel.setGameState(33);
+			
+			do {
+				x = rand.nextInt(10);
+				y = rand.nextInt(10);
+				h = rand.nextInt(2);
+				if (h == 0)
+					orient = true;
+				else
+					orient = false;
+				
+				invalid = windowModel.getSetup().placeCruiser(x, y, orient);
+				
+				}while (invalid);
+			setMessage("Autoplace placed your Cruiser at " + x + "," + y + ".");
+	   		setGridIconsShip(x,y,isVertical,5,"Images/Cruiser.png");
+	   		windowModel.setGameState(34);			
+			
+			do {
+				x = rand.nextInt(10);
+				y = rand.nextInt(10);
+				h = rand.nextInt(2);
+				if (h == 0)
+					orient = true;
+				else
+					orient = false;
+				
+				invalid = windowModel.getSetup().placeSubmarine(x, y, orient);
+				
+				}while (invalid);
+			setMessage("Autoplace placed your Submarine at " + x + "," + y + ".");
+	   		setGridIconsShip(x,y,isVertical,5,"Images/Submarine.png");
+	   		windowModel.setGameState(35);			
+			
+			do {
+				x = rand.nextInt(10);
+				y = rand.nextInt(10);
+				h = rand.nextInt(2);
+				if (h == 0)
+					orient = true;
+				else
+					orient = false;
+				
+				invalid = windowModel.getSetup().placeDestroyer(x, y, orient);
+				
+				}while (invalid);
+			setMessage("Autoplace placed your Destroyer at " + x + "," + y + ".");
+	   		setGridIconsShip(x,y,isVertical,5,"Images/Destroyer.png");
+	   		windowModel.setGameState(4);
+	   		windowModel.setClientReady(true);
+	   		sendData("SERVER READY");
+	   		if (windowModel.getServerReady())
+	   		{
+	   			windowModel.setGameState(0);
+	   			setMessage("Awaiting enemy move.");
+	   		} else
+	   		{
+	   			setMessage("Waiting for opponent to finish placing ships.");
+	   		}
+		   }
+		}
 }
 
