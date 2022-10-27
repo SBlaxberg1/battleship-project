@@ -1,3 +1,4 @@
+import java.util.Random;
 
 public class Setup {
 	
@@ -12,17 +13,84 @@ public class Setup {
 		grid = g;
 	}
 	
-	/*
-	public void startGame() {
+	public void autoPlace() {
+		Random rand = new Random();
+		boolean orient;
+		boolean invalid;
+		int x;
+		int y;
+		int h;
 		
-		placeCarrier(1, 1, true);
-		placeBShip(2, 2, true);
-		placeCruiser(3, 3, true);
-		placeSubmarine(4, 4, true);
-		placeDestroyer(5, 5, true);
+		do {
+		x = rand.nextInt(10);
+		y = rand.nextInt(10);
+		h = rand.nextInt(2);
+		if (h == 0)
+			orient = true;
+		else
+			orient = false;
+		
+		invalid = placeCarrier(x, y, orient);
+		
+		}while (invalid);
+		
+		
+		do {
+			x = rand.nextInt(10);
+			y = rand.nextInt(10);
+			h = rand.nextInt(2);
+			if (h == 0)
+				orient = true;
+			else
+				orient = false;
+			
+			invalid = placeBShip(x, y, orient);
+			
+			}while (invalid);
+		
+		
+		do {
+			x = rand.nextInt(10);
+			y = rand.nextInt(10);
+			h = rand.nextInt(2);
+			if (h == 0)
+				orient = true;
+			else
+				orient = false;
+			
+			invalid = placeCruiser(x, y, orient);
+			
+			}while (invalid);
+		
+		
+		do {
+			x = rand.nextInt(10);
+			y = rand.nextInt(10);
+			h = rand.nextInt(2);
+			if (h == 0)
+				orient = true;
+			else
+				orient = false;
+			
+			invalid = placeSubmarine(x, y, orient);
+			
+			}while (invalid);
+		
+		
+		do {
+			x = rand.nextInt(10);
+			y = rand.nextInt(10);
+			h = rand.nextInt(2);
+			if (h == 0)
+				orient = true;
+			else
+				orient = false;
+			
+			invalid = placeDestroyer(x, y, orient);
+			
+			}while (invalid);
 		
 	}
-	*/
 	
 	public boolean placeCarrier(int x, int y, boolean h) {
 		boolean invalid = false;
@@ -30,31 +98,22 @@ public class Setup {
 		int column = y;
 		boolean isHorizontal = h;
 		
-		System.out.println("Place the Carrier (5 spaces)");	
-		
 		if (isHorizontal == true && column >= 6) {
-			System.out.println("Invalid");
 			invalid = true;
 		} else if (isHorizontal == false && row >= 6){
-			System.out.println("Invalid");
 			invalid = true;
 		}
-		
-		//row -= 1;
-		//column -= 1;
 		
 		if (invalid != true) {
 		if (isHorizontal == true) {
 			for (int i = column; i < column + 5; i++) {
 				if (grid[row][i].getOccupant() != null) {
-					System.out.println("There is a ship here already");
 					invalid = true;
 				}
 			}
 		} else {
 			for (int i = row; i < row + 5; i++) {
 				if (grid[i][column].getOccupant() != null) {
-					System.out.println("There is a ship here already");
 					invalid = true;
 				}
 			}
@@ -81,33 +140,24 @@ public class Setup {
 		boolean invalid = false;
 		int row = x;
 		int column = y;
-		boolean isHorizontal = h;
-		
-		System.out.println("Place the Battleship (4 spaces)");	
+		boolean isHorizontal = h;	
 		
 		if (isHorizontal == true && column >= 7) {
-			System.out.println("Invalid");
 			invalid = true;
 		} else if (isHorizontal == false && row >= 7){
-			System.out.println("Invalid");
 			invalid = true;
 		}
-		
-		//row -= 1;
-		//column -= 1;
 		
 		if (invalid != true) {
 		if (isHorizontal == true) {
 			for (int i = column; i < column + 4; i++) {
 				if (grid[row][i].getOccupant() != null) {
-					System.out.println("There is a ship here already");
 					invalid = true;
 				}
 			}
 		} else {
 			for (int i = row; i < row + 4; i++) {
 				if (grid[i][column].getOccupant() != null) {
-					System.out.println("There is a ship here already");
 					invalid = true;
 				}
 			}
@@ -136,31 +186,22 @@ public class Setup {
 		int column = y;
 		boolean isHorizontal = h;
 		
-		System.out.println("Place the Cruiser (3 spaces)");	
-		
 		if (isHorizontal == true && column >= 8) {
-			System.out.println("Invalid");
 			invalid = true;
 		} else if (isHorizontal == false && row >= 8){
-			System.out.println("Invalid");
 			invalid = true;
 		}
-		
-		//row -= 1;
-		//column -= 1;
 		
 		if (invalid != true) {
 		if (isHorizontal == true) {
 			for (int i = column; i < column + 3; i++) {
 				if (grid[row][i].getOccupant() != null) {
-					System.out.println("There is a ship here already");
 					invalid = true;
 				}
 			}
 		} else {
 			for (int i = row; i < row + 3; i++) {
 				if (grid[i][column].getOccupant() != null) {
-					System.out.println("There is a ship here already");
 					invalid = true;
 				}
 			}
@@ -188,33 +229,24 @@ public class Setup {
 		boolean invalid = false;
 		int row = x;
 		int column = y;
-		boolean isHorizontal = h;
-		
-		System.out.println("Place the Submarine (3 spaces)");	
+		boolean isHorizontal = h;	
 		
 		if (isHorizontal == true && column >= 8) {
-			System.out.println("Invalid");
 			invalid = true;
 		} else if (isHorizontal == false && row >= 8){
-			System.out.println("Invalid");
 			invalid = true;
 		}
-		
-		//row -= 1;
-		//column -= 1;
 		
 		if (invalid != true) {
 		if (isHorizontal == true) {
 			for (int i = column; i < column + 3; i++) {
 				if (grid[row][i].getOccupant() != null) {
-					System.out.println("There is a ship here already");
 					invalid = true;
 				}
 			}
 		} else {
 			for (int i = row; i < row + 3; i++) {
 				if (grid[i][column].getOccupant() != null) {
-					System.out.println("There is a ship here already");
 					invalid = true;
 				}
 			}
@@ -241,33 +273,24 @@ public class Setup {
 		boolean invalid = false;
 		int row = x;
 		int column = y;
-		boolean isHorizontal = h;
-		
-		System.out.println("Place the Destroyer (2 spaces)");	
+		boolean isHorizontal = h;	
 		
 		if (isHorizontal == true && column >= 9) {
-			System.out.println("Invalid");
 			invalid = true;
 		} else if (isHorizontal == false && row >= 9){
-			System.out.println("Invalid");
 			invalid = true;
 		}
-		
-		//row -= 1;
-		//column -= 1;
 		
 		if (invalid != true) {
 		if (isHorizontal == true) {
 			for (int i = column; i < column + 2; i++) {
 				if (grid[row][i].getOccupant() != null) {
-					System.out.println("There is a ship here already");
 					invalid = true;
 				}
 			}
 		} else {
 			for (int i = row; i < row + 2; i++) {
 				if (grid[i][column].getOccupant() != null) {
-					System.out.println("There is a ship here already");
 					invalid = true;
 				}
 			}
