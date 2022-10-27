@@ -123,20 +123,42 @@ public class ClientGameWindow extends GameWindow {
 	 				   Image icon = shipImg.getImage();
 	 				   Image resize = icon.getScaledInstance(22,  22,  java.awt.Image.SCALE_SMOOTH);
 	 				   shipImg = new ImageIcon(resize);
-	            	   clientGrid[x][y].setIcon(shipImg);
-	            	   setMessage("Enemy shot at " + x + " , " + y + " and hit!");
-	            	} else
+	            		clientGrid[x][y].setIcon(shipImg);
+	            		setMessage("Enemy shot at " + x + ", " + y + " and hit!");
+		            	windowModel.setGameState(1);
+		            	setMessage("Your turn. Click on the enemy's grid to fire a shot.");
+	            	} else if (didHit.equals("miss"))
 	            	{
 	            		ImageIcon shipImg = new ImageIcon("Images/miss.png");
 		 				   Image icon = shipImg.getImage();
 		 				   Image resize = icon.getScaledInstance(22,  22,  java.awt.Image.SCALE_SMOOTH);
 		 				   shipImg = new ImageIcon(resize);
 		            		clientGrid[x][y].setIcon(shipImg);
-		            		setMessage("Enemy shot at " + x + " , " + y + " and missed!");
+		            		setMessage("Enemy shot at " + x + ", " + y + " and missed!");
+			            	windowModel.setGameState(1);
+			            	setMessage("Your turn. Click on the enemy's grid to fire a shot.");
+	            	} else if (didHit.equals("sunk"))
+	            	{
+	            		ImageIcon shipImg = new ImageIcon("Images/hit.png");
+		 				   Image icon = shipImg.getImage();
+		 				   Image resize = icon.getScaledInstance(22,  22,  java.awt.Image.SCALE_SMOOTH);
+		 				   shipImg = new ImageIcon(resize);
+		            		clientGrid[x][y].setIcon(shipImg);
+		            		setMessage("Enemy shot at " + x + ", " + y + " and sunk a ship!");
+			            	windowModel.setGameState(1);
+			            	setMessage("Your turn. Click on the enemy's grid to fire a shot.");
+	            	} else if (didHit.equals("lose"))
+	            	{
+	            		ImageIcon shipImg = new ImageIcon("Images/hit.png");
+		 				   Image icon = shipImg.getImage();
+		 				   Image resize = icon.getScaledInstance(22,  22,  java.awt.Image.SCALE_SMOOTH);
+		 				   shipImg = new ImageIcon(resize);
+		            		clientGrid[x][y].setIcon(shipImg);
+		            		setMessage("Enemy shot at " + x + ", " + y + " and sunk your last ship!");
+		            		setMessage("You lost!");
+			            	windowModel.setGameState(5);
 	            	}
 	            	sendResult(didHit);
-	            	windowModel.setGameState(1);
-	            	setMessage("Your turn. Click on the enemy's grid to fire a shot.");
 	            }
 	            
 	         // Return confirmation of hit or miss
@@ -159,6 +181,26 @@ public class ClientGameWindow extends GameWindow {
 					   shipImg = new ImageIcon(resize);
 				      serverGrid[netCordsX][netCordsY].setIcon(shipImg);
 				      setMessage("Awaiting enemy move.");
+	            }
+	            if (message.equals("sunk"))
+	            {
+	            	setMessage("You sunk an enemy ship!");
+	            	ImageIcon shipImg = new ImageIcon("Images/hit.png");
+	            	Image icon = shipImg.getImage();
+	            	Image resize = icon.getScaledInstance(22,  22,  java.awt.Image.SCALE_SMOOTH);
+	            	shipImg = new ImageIcon(resize);
+	            	serverGrid[netCordsX][netCordsY].setIcon(shipImg);
+	            	setMessage("Awaiting enemy move.");
+	            }
+	            if (message.equals("lose"))
+	            {
+	            	setMessage("You defeated the enemy and have won the game!");
+	            	ImageIcon shipImg = new ImageIcon("Images/hit.png");
+	            	Image icon = shipImg.getImage();
+	            	Image resize = icon.getScaledInstance(22,  22,  java.awt.Image.SCALE_SMOOTH);
+	            	shipImg = new ImageIcon(resize);
+	            	serverGrid[netCordsX][netCordsY].setIcon(shipImg);
+	            	windowModel.setGameState(5);
 	            }
 	            
 	            displayMessage( "\n" + message ); // display message

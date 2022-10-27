@@ -11,6 +11,7 @@ public class GameState {
 	// 34 = Setup - Submarine
 	// 35 = Setup - Destroyer
 	// 4 = Awaiting Other Playing Finishing Placing Ships
+	// 5 = End Game State
 	
 	public GameState(int s)
 	{
