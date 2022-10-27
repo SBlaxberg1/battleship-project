@@ -11,6 +11,7 @@ public class BattleshipModel
 	private boolean clientReady;
 	
 	private Tile[][] grid;
+	private int numSunk = 0;
 	
 	BattleshipModel()
 	{
@@ -84,6 +85,13 @@ public class BattleshipModel
 	public String receiveShot (int x, int y) {
 		if (grid[x][y].getOccupant() instanceof Ship) {
 			grid[x][y].getOccupant().takeHit();
+			if (grid[x][y].getOccupant().getIsSunk()) {
+				numSunk++;
+				if (numSunk == 5) {
+					return "lose";
+				}
+				return "sunk";
+			}
 			return "hit";
 		} else {
 			return "miss";
