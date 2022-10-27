@@ -518,7 +518,7 @@ public class ClientGameWindow extends GameWindow {
 			
 			}while (invalid);
 			setMessage("Autoplace placed your Carrier at " + x + "," + y + ".");
-	   		setGridIconsShip(x,y,isVertical,5,"Images/Carrier.png");
+	   		setGridIconsShip(x,y,orient,5,"Images/Carrier.png");
 	   		windowModel.setGameState(32);
 			
 			do {
@@ -534,7 +534,7 @@ public class ClientGameWindow extends GameWindow {
 				
 				}while (invalid);
 			setMessage("Autoplace placed your Battleship at " + x + "," + y + ".");
-	   		setGridIconsShip(x,y,isVertical,5,"Images/BShip.png");
+	   		setGridIconsShip(x,y,orient,4,"Images/BShip.png");
 	   		windowModel.setGameState(33);
 			
 			do {
@@ -550,7 +550,7 @@ public class ClientGameWindow extends GameWindow {
 				
 				}while (invalid);
 			setMessage("Autoplace placed your Cruiser at " + x + "," + y + ".");
-	   		setGridIconsShip(x,y,isVertical,5,"Images/Cruiser.png");
+	   		setGridIconsShip(x,y,orient,3,"Images/Cruiser.png");
 	   		windowModel.setGameState(34);			
 			
 			do {
@@ -566,7 +566,7 @@ public class ClientGameWindow extends GameWindow {
 				
 				}while (invalid);
 			setMessage("Autoplace placed your Submarine at " + x + "," + y + ".");
-	   		setGridIconsShip(x,y,isVertical,5,"Images/Submarine.png");
+	   		setGridIconsShip(x,y,orient,3,"Images/Submarine.png");
 	   		windowModel.setGameState(35);			
 			
 			do {
@@ -582,10 +582,10 @@ public class ClientGameWindow extends GameWindow {
 				
 				}while (invalid);
 			setMessage("Autoplace placed your Destroyer at " + x + "," + y + ".");
-	   		setGridIconsShip(x,y,isVertical,5,"Images/Destroyer.png");
+	   		setGridIconsShip(x,y,orient,2,"Images/Destroyer.png");
 	   		windowModel.setGameState(4);
 	   		windowModel.setClientReady(true);
-	   		sendData("SERVER READY");
+	   		sendData("CLIENT READY");
 	   		if (windowModel.getServerReady())
 	   		{
 	   			windowModel.setGameState(0);
