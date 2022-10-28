@@ -5,6 +5,8 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -13,11 +15,13 @@ import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.TransferHandler;
 import javax.swing.text.DefaultCaret;
 
 // (View) Creates the Game Window and GUI
@@ -175,6 +179,16 @@ public abstract class GameWindow extends JFrame {
 	  Image resize1 = icon1.getScaledInstance(200,  75,  java.awt.Image.SCALE_SMOOTH);
 	  carrierIcon = new ImageIcon(resize1);
 	  JLabel carrierLabel = new JLabel(carrierIcon);
+	  
+	  final String propertyName = "text";
+	  carrierLabel.setTransferHandler(new TransferHandler(propertyName));
+	  carrierLabel.addMouseListener(new MouseAdapter() {
+		  public void mousePressed(MouseEvent evt) {
+			  JComponent comp = (JComponent) evt.getSource();
+			  TransferHandler th = comp.getTransferHandler();
+			  th.exportAsDrag(comp,  evt,  TransferHandler.COPY);;
+		  }
+	  });
 	  
 	  BufferedImage bship = ImageIO.read(new File("Images/BShip.png"));
 	  ImageIcon bshipIcon = new ImageIcon(bship);
