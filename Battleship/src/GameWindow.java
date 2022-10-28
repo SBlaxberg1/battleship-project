@@ -182,13 +182,14 @@ public abstract class GameWindow extends JFrame {
 	  
 	  final String propertyName = "text";
 	  carrierLabel.setTransferHandler(new TransferHandler(propertyName));
+
 	  carrierLabel.addMouseListener(new MouseAdapter() {
-		  public void mousePressed(MouseEvent evt) {
-			  JComponent comp = (JComponent) evt.getSource();
-			  TransferHandler th = comp.getTransferHandler();
-			  th.exportAsDrag(comp,  evt,  TransferHandler.COPY);;
-		  }
-	  });
+	      public void mousePressed(MouseEvent evt) {
+	        JComponent comp = (JComponent) evt.getSource();
+	        TransferHandler th = comp.getTransferHandler();
+	        th.exportAsDrag(comp, evt, TransferHandler.COPY);
+	      }
+	    });
 	  
 	  BufferedImage bship = ImageIO.read(new File("Images/BShip.png"));
 	  ImageIcon bshipIcon = new ImageIcon(bship);

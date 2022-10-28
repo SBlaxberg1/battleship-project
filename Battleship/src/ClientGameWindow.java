@@ -236,7 +236,7 @@ public class ClientGameWindow extends GameWindow {
 	            }
 		        if (message.equals("sunkBattleship"))
 		            {
-		            	setMessage("You sunk your opponent's carrier!");
+		            	setMessage("You sunk your opponent's battleship!");
 		            	ImageIcon shipImg = new ImageIcon("Images/hit.png");
 		            	Image icon = shipImg.getImage();
 		            	Image resize = icon.getScaledInstance(22,  22,  java.awt.Image.SCALE_SMOOTH);
