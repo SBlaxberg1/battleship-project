@@ -87,10 +87,18 @@ public class BattleshipModel
 			grid[x][y].getOccupant().takeHit();
 			if (grid[x][y].getOccupant().getIsSunk()) {
 				numSunk++;
-				if (numSunk == 5) {
-					return "lose";
-				}
-				return "sunk";
+				if (numSunk == 5)
+					return "You sunk their last ship and won the game!";
+				if (grid[x][y].getOccupant() instanceof Carrier)
+					return "You sunk their carrier!";
+				if (grid[x][y].getOccupant() instanceof BShip)
+					return "You sunk their battleship!";
+				if (grid[x][y].getOccupant() instanceof Cruiser)
+					return "You sunk their cruiser!";
+				if (grid[x][y].getOccupant() instanceof Submarine)
+					return "You sunk their submarine!";
+				if (grid[x][y].getOccupant() instanceof Destroyer)
+					return "You sunk their destroyer!";
 			}
 			return "hit";
 		} else {
