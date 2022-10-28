@@ -138,17 +138,58 @@ public class ClientGameWindow extends GameWindow {
 		            		setMessage("Enemy shot at " + x + ", " + y + " and missed!");
 			            	windowModel.setGameState(1);
 			            	setMessage("Your turn. Click on the enemy's grid to fire a shot.");
-	            	} else if (didHit.equals("sunk"))
+	            	} else if (didHit.equals("sunkCarrier"))
 	            	{
 	            		ImageIcon shipImg = new ImageIcon("Images/hit.png");
 		 				   Image icon = shipImg.getImage();
 		 				   Image resize = icon.getScaledInstance(22,  22,  java.awt.Image.SCALE_SMOOTH);
 		 				   shipImg = new ImageIcon(resize);
 		            		clientGrid[x][y].setIcon(shipImg);
-		            		setMessage("Enemy shot at " + x + ", " + y + " and sunk a ship!");
+		            		setMessage("Enemy shot at " + x + ", " + y + " and sunk your carrier!");
 			            	windowModel.setGameState(1);
 			            	setMessage("Your turn. Click on the enemy's grid to fire a shot.");
-	            	} else if (didHit.equals("lose"))
+	            	} else if (didHit.equals("sunkBattleship"))
+	            	{
+	            		ImageIcon shipImg = new ImageIcon("Images/hit.png");
+		 				Image icon = shipImg.getImage();
+		 				Image resize = icon.getScaledInstance(22,  22,  java.awt.Image.SCALE_SMOOTH);
+		 				shipImg = new ImageIcon(resize);
+		            	clientGrid[x][y].setIcon(shipImg);
+		            	setMessage("Enemy shot at " + x + ", " + y + " and sunk your battleship!");
+			            windowModel.setGameState(1);
+			            setMessage("Your turn. Click on the enemy's grid to fire a shot.");
+	            	} else if (didHit.equals("sunkCruiser"))
+	            	{
+	            		ImageIcon shipImg = new ImageIcon("Images/hit.png");
+		 				Image icon = shipImg.getImage();
+		 				Image resize = icon.getScaledInstance(22,  22,  java.awt.Image.SCALE_SMOOTH);
+		 				shipImg = new ImageIcon(resize);
+		            	clientGrid[x][y].setIcon(shipImg);
+		            	setMessage("Enemy shot at " + x + ", " + y + " and sunk your cruiser!");
+			            windowModel.setGameState(1);
+			            setMessage("Your turn. Click on the enemy's grid to fire a shot.");
+	            	} else if (didHit.equals("sunkSubmarine"))
+	            	{
+	            		ImageIcon shipImg = new ImageIcon("Images/hit.png");
+		 				Image icon = shipImg.getImage();
+		 				Image resize = icon.getScaledInstance(22,  22,  java.awt.Image.SCALE_SMOOTH);
+		 				shipImg = new ImageIcon(resize);
+		            	clientGrid[x][y].setIcon(shipImg);
+		            	setMessage("Enemy shot at " + x + ", " + y + " and sunk your submarine!");
+			            windowModel.setGameState(1);
+			            setMessage("Your turn. Click on the enemy's grid to fire a shot.");
+	            	} else if (didHit.equals("sunkDestroyer"))
+	            	{
+	            		ImageIcon shipImg = new ImageIcon("Images/hit.png");
+		 				Image icon = shipImg.getImage();
+		 				Image resize = icon.getScaledInstance(22,  22,  java.awt.Image.SCALE_SMOOTH);
+		 				shipImg = new ImageIcon(resize);
+		            	clientGrid[x][y].setIcon(shipImg);
+		            	setMessage("Enemy shot at " + x + ", " + y + " and sunk your destroyer!");
+			            windowModel.setGameState(1);
+			            setMessage("Your turn. Click on the enemy's grid to fire a shot.");
+	            	}
+	            	else if (didHit.equals("lose"))
 	            	{
 	            		ImageIcon shipImg = new ImageIcon("Images/hit.png");
 		 				   Image icon = shipImg.getImage();
@@ -183,9 +224,49 @@ public class ClientGameWindow extends GameWindow {
 				      serverGrid[netCordsX][netCordsY].setIcon(shipImg);
 				      setMessage("Awaiting enemy move.");
 	            }
-	            if (message.equals("sunk"))
+	            if (message.equals("sunkCarrier"))
 	            {
-	            	setMessage("You sunk an enemy ship!");
+	            	setMessage("You sunk your opponent's carrier!");
+	            	ImageIcon shipImg = new ImageIcon("Images/hit.png");
+	            	Image icon = shipImg.getImage();
+	            	Image resize = icon.getScaledInstance(22,  22,  java.awt.Image.SCALE_SMOOTH);
+	            	shipImg = new ImageIcon(resize);
+	            	serverGrid[netCordsX][netCordsY].setIcon(shipImg);
+	            	setMessage("Awaiting enemy move.");
+	            }
+		        if (message.equals("sunkBattleship"))
+		            {
+		            	setMessage("You sunk your opponent's carrier!");
+		            	ImageIcon shipImg = new ImageIcon("Images/hit.png");
+		            	Image icon = shipImg.getImage();
+		            	Image resize = icon.getScaledInstance(22,  22,  java.awt.Image.SCALE_SMOOTH);
+		            	shipImg = new ImageIcon(resize);
+		            	serverGrid[netCordsX][netCordsY].setIcon(shipImg);
+		            	setMessage("Awaiting enemy move.");
+	            }
+		        if (message.equals("sunkCruiser"))
+	            {
+	            	setMessage("You sunk your opponent's cruiser!");
+	            	ImageIcon shipImg = new ImageIcon("Images/hit.png");
+	            	Image icon = shipImg.getImage();
+	            	Image resize = icon.getScaledInstance(22,  22,  java.awt.Image.SCALE_SMOOTH);
+	            	shipImg = new ImageIcon(resize);
+	            	serverGrid[netCordsX][netCordsY].setIcon(shipImg);
+	            	setMessage("Awaiting enemy move.");
+	            }
+		        if (message.equals("sunkSubmarine"))
+	            {
+	            	setMessage("You sunk your opponent's submarine!");
+	            	ImageIcon shipImg = new ImageIcon("Images/hit.png");
+	            	Image icon = shipImg.getImage();
+	            	Image resize = icon.getScaledInstance(22,  22,  java.awt.Image.SCALE_SMOOTH);
+	            	shipImg = new ImageIcon(resize);
+	            	serverGrid[netCordsX][netCordsY].setIcon(shipImg);
+	            	setMessage("Awaiting enemy move.");
+	            }
+		        if (message.equals("sunkDestroyer"))
+	            {
+	            	setMessage("You sunk your opponent's destroyer!");
 	            	ImageIcon shipImg = new ImageIcon("Images/hit.png");
 	            	Image icon = shipImg.getImage();
 	            	Image resize = icon.getScaledInstance(22,  22,  java.awt.Image.SCALE_SMOOTH);
@@ -249,7 +330,7 @@ public class ClientGameWindow extends GameWindow {
 	   // manipulates displayArea in the event-dispatch thread
 	   private void displayMessage( final String messageToDisplay )
 	   {
-	      System.out.println(messageToDisplay);
+	      //System.out.println(messageToDisplay);
 	   } // end method displayMessage
 	   
 	   private void sendHit(String coords)
