@@ -707,6 +707,8 @@ public class ClientGameWindow extends GameWindow {
 	   		{
 	   			windowModel.setGameState(0);
 	   			setMessage("Awaiting enemy move.");
+	   			AudioPlayer audio = new AudioPlayer();
+        		audio.play("./Sounds/gameStart.wav");
 	   		} else
 	   		{
 	   			setMessage("Waiting for opponent to finish placing ships.");

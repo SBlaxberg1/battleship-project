@@ -36,7 +36,7 @@ public class AudioPlayer implements LineListener {
 			while (!playCompleted) {
 			// wait for the playback completes
 			try {
-				Thread.sleep(1000);
+				Thread.sleep(100);
 				} catch (InterruptedException ex) {
 					ex.printStackTrace();
 				}
