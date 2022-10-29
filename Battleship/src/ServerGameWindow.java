@@ -28,6 +28,7 @@ public class ServerGameWindow extends GameWindow {
 	   private BattleshipModel windowModel;
 	   private int netCordsX = -1;
 	   private int netCordsY = -1;
+	   private AudioPlayer audio = new AudioPlayer();
 
 	   public ServerGameWindow(BattleshipModel bmod) throws IOException
 	   {
@@ -139,6 +140,7 @@ public class ServerGameWindow extends GameWindow {
 	 				   shipImg = new ImageIcon(resize);
 	            		clientGrid[x][y].setIcon(shipImg);
 	            		setMessage("Enemy shot at " + x + ", " + y + " and hit!");
+	            		audio.play("./Sounds/hit.wav");
 		            	windowModel.setGameState(0);
 		            	setMessage("Your turn. Click on the enemy's grid to fire a shot.");
 	            	} else if (didHit.equals("miss"))
