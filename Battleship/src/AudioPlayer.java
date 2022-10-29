@@ -1,72 +1,47 @@
 import java.io.File;
 import java.io.IOException;
 
-import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.DataLine;
-import javax.sound.sampled.LineEvent;
-import javax.sound.sampled.LineListener;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
-public class AudioPlayer implements LineListener {
+public class AudioPlayer
+{
+    private Clip clip;
 
-	boolean playCompleted;
-	
-	void play(String audioFilePath) {
-		File audioFile = new File(audioFilePath);
-		
+    public void play(String soundFileName)
+    {
+         File audioFile = new File(soundFileName);
+         AudioInputStream ais = null;
 		try {
-			AudioInputStream audioStream = AudioSystem.getAudioInputStream(audioFile);
-			
-			AudioFormat format = audioStream.getFormat();
-			
-			DataLine.Info info = new DataLine.Info(Clip.class, format);
-			
-			Clip audioClip = (Clip) AudioSystem.getLine(info);
-			
-			audioClip.addLineListener(this);
-			
-			audioClip.open(audioStream);
-			
-			audioClip.start();
-			
-			while (!playCompleted) {
-			// wait for the playback completes
-			try {
-				Thread.sleep(100);
-				} catch (InterruptedException ex) {
-					ex.printStackTrace();
-				}
-			}
-			
-			audioClip.close();
-		} catch (UnsupportedAudioFileException ex) {
-			System.out.println("The specified audio file is not supported.");
-			ex.printStackTrace();
-			} catch (LineUnavailableException ex) {
-				System.out.println("Audio line for playing back is unavailable.");
-				ex.printStackTrace();
-			} catch (IOException ex) {
-				System.out.println("Error playing the audio file.");
-				ex.printStackTrace();
+			ais = AudioSystem.getAudioInputStream(audioFile);
+		} catch (UnsupportedAudioFileException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-	
-	}
-	
-	/**
-	* Listens to the START and STOP events of the audio line.
-	*/
-	@Override
-	public void update(LineEvent event) {
-		LineEvent.Type type = event.getType();
-		if (type == LineEvent.Type.START) {
-			System.out.println("Playback started.");
-		} else if (type == LineEvent.Type.STOP) {
-			playCompleted = true;
-			System.out.println("Playback completed.");
+         DataLine.Info info = new DataLine.Info(Clip.class, ais.getFormat());
+         try {
+			clip = (Clip) AudioSystem.getLine(info);
+		} catch (LineUnavailableException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-	}
+         try {
+			clip.open(ais);
+		} catch (LineUnavailableException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+         clip.setFramePosition(0);
+         clip.start();
+    } 
 }
