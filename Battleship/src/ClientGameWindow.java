@@ -107,6 +107,8 @@ public class ClientGameWindow extends GameWindow {
 	            	if (windowModel.getClientReady())
 	            	{
 		            	windowModel.setGameState(0);
+		            	AudioPlayer audio = new AudioPlayer();
+	            		audio.play("./Sounds/gameStart.wav");
 		            	setMessage("Awaiting enemy move.");
 	            	}
             	}
@@ -126,6 +128,8 @@ public class ClientGameWindow extends GameWindow {
 	 				   shipImg = new ImageIcon(resize);
 	            		clientGrid[x][y].setIcon(shipImg);
 	            		setMessage("Enemy shot at " + x + ", " + y + " and hit!");
+	            		AudioPlayer audio = new AudioPlayer();
+	            		audio.play("./Sounds/hit.wav");
 		            	windowModel.setGameState(1);
 		            	setMessage("Your turn. Click on the enemy's grid to fire a shot.");
 	            	} else if (didHit.equals("miss"))
@@ -136,6 +140,8 @@ public class ClientGameWindow extends GameWindow {
 		 				   shipImg = new ImageIcon(resize);
 		            		clientGrid[x][y].setIcon(shipImg);
 		            		setMessage("Enemy shot at " + x + ", " + y + " and missed!");
+		            		AudioPlayer audio = new AudioPlayer();
+		            		audio.play("./Sounds/miss.wav");
 			            	windowModel.setGameState(1);
 			            	setMessage("Your turn. Click on the enemy's grid to fire a shot.");
 	            	} else if (didHit.equals("sunkCarrier"))
@@ -146,6 +152,8 @@ public class ClientGameWindow extends GameWindow {
 		 				   shipImg = new ImageIcon(resize);
 		            		clientGrid[x][y].setIcon(shipImg);
 		            		setMessage("Enemy shot at " + x + ", " + y + " and sunk your carrier!");
+		            		AudioPlayer audio = new AudioPlayer();
+		            		audio.play("./Sounds/sunk.wav");
 			            	windowModel.setGameState(1);
 			            	setMessage("Your turn. Click on the enemy's grid to fire a shot.");
 	            	} else if (didHit.equals("sunkBattleship"))
@@ -156,6 +164,8 @@ public class ClientGameWindow extends GameWindow {
 		 				shipImg = new ImageIcon(resize);
 		            	clientGrid[x][y].setIcon(shipImg);
 		            	setMessage("Enemy shot at " + x + ", " + y + " and sunk your battleship!");
+		            	AudioPlayer audio = new AudioPlayer();
+	            		audio.play("./Sounds/sunk.wav");
 			            windowModel.setGameState(1);
 			            setMessage("Your turn. Click on the enemy's grid to fire a shot.");
 	            	} else if (didHit.equals("sunkCruiser"))
@@ -166,6 +176,8 @@ public class ClientGameWindow extends GameWindow {
 		 				shipImg = new ImageIcon(resize);
 		            	clientGrid[x][y].setIcon(shipImg);
 		            	setMessage("Enemy shot at " + x + ", " + y + " and sunk your cruiser!");
+		            	AudioPlayer audio = new AudioPlayer();
+	            		audio.play("./Sounds/sunk.wav");
 			            windowModel.setGameState(1);
 			            setMessage("Your turn. Click on the enemy's grid to fire a shot.");
 	            	} else if (didHit.equals("sunkSubmarine"))
@@ -176,6 +188,8 @@ public class ClientGameWindow extends GameWindow {
 		 				shipImg = new ImageIcon(resize);
 		            	clientGrid[x][y].setIcon(shipImg);
 		            	setMessage("Enemy shot at " + x + ", " + y + " and sunk your submarine!");
+		            	AudioPlayer audio = new AudioPlayer();
+	            		audio.play("./Sounds/sunk.wav");
 			            windowModel.setGameState(1);
 			            setMessage("Your turn. Click on the enemy's grid to fire a shot.");
 	            	} else if (didHit.equals("sunkDestroyer"))
@@ -186,6 +200,8 @@ public class ClientGameWindow extends GameWindow {
 		 				shipImg = new ImageIcon(resize);
 		            	clientGrid[x][y].setIcon(shipImg);
 		            	setMessage("Enemy shot at " + x + ", " + y + " and sunk your destroyer!");
+		            	AudioPlayer audio = new AudioPlayer();
+	            		audio.play("./Sounds/sunk.wav");
 			            windowModel.setGameState(1);
 			            setMessage("Your turn. Click on the enemy's grid to fire a shot.");
 	            	}
@@ -197,6 +213,8 @@ public class ClientGameWindow extends GameWindow {
 		 				   shipImg = new ImageIcon(resize);
 		            		clientGrid[x][y].setIcon(shipImg);
 		            		setMessage("Enemy shot at " + x + ", " + y + " and sunk your last ship!");
+		            		AudioPlayer audio = new AudioPlayer();
+		            		audio.play("./Sounds/loss.wav");
 		            		setMessage("You lost!");
 			            	windowModel.setGameState(5);
 	            	}
@@ -207,6 +225,8 @@ public class ClientGameWindow extends GameWindow {
 	            if (message.equals("hit"))
 	            {
 	            	setMessage("Hit!");
+	            	AudioPlayer audio = new AudioPlayer();
+            		audio.play("./Sounds/hit.wav");
 	            	ImageIcon shipImg = new ImageIcon("Images/hit.png");
 					   Image icon = shipImg.getImage();
 					   Image resize = icon.getScaledInstance(22,  22,  java.awt.Image.SCALE_SMOOTH);
@@ -217,6 +237,8 @@ public class ClientGameWindow extends GameWindow {
 	            if (message.equals("miss"))
 	            {
 	            	setMessage("Miss!");
+	            	AudioPlayer audio = new AudioPlayer();
+            		audio.play("./Sounds/miss.wav");
 	            	ImageIcon shipImg = new ImageIcon("Images/miss.png");
 					   Image icon = shipImg.getImage();
 					   Image resize = icon.getScaledInstance(22,  22,  java.awt.Image.SCALE_SMOOTH);
@@ -227,6 +249,8 @@ public class ClientGameWindow extends GameWindow {
 	            if (message.equals("sunkCarrier"))
 	            {
 	            	setMessage("You sunk your opponent's carrier!");
+	            	AudioPlayer audio = new AudioPlayer();
+            		audio.play("./Sounds/sunk.wav");
 	            	ImageIcon shipImg = new ImageIcon("Images/hit.png");
 	            	Image icon = shipImg.getImage();
 	            	Image resize = icon.getScaledInstance(22,  22,  java.awt.Image.SCALE_SMOOTH);
@@ -237,6 +261,8 @@ public class ClientGameWindow extends GameWindow {
 		        if (message.equals("sunkBattleship"))
 		            {
 		            	setMessage("You sunk your opponent's battleship!");
+		            	AudioPlayer audio = new AudioPlayer();
+	            		audio.play("./Sounds/sunk.wav");
 		            	ImageIcon shipImg = new ImageIcon("Images/hit.png");
 		            	Image icon = shipImg.getImage();
 		            	Image resize = icon.getScaledInstance(22,  22,  java.awt.Image.SCALE_SMOOTH);
@@ -247,6 +273,8 @@ public class ClientGameWindow extends GameWindow {
 		        if (message.equals("sunkCruiser"))
 	            {
 	            	setMessage("You sunk your opponent's cruiser!");
+	            	AudioPlayer audio = new AudioPlayer();
+            		audio.play("./Sounds/sunk.wav");
 	            	ImageIcon shipImg = new ImageIcon("Images/hit.png");
 	            	Image icon = shipImg.getImage();
 	            	Image resize = icon.getScaledInstance(22,  22,  java.awt.Image.SCALE_SMOOTH);
@@ -257,6 +285,8 @@ public class ClientGameWindow extends GameWindow {
 		        if (message.equals("sunkSubmarine"))
 	            {
 	            	setMessage("You sunk your opponent's submarine!");
+	            	AudioPlayer audio = new AudioPlayer();
+            		audio.play("./Sounds/sunk.wav");
 	            	ImageIcon shipImg = new ImageIcon("Images/hit.png");
 	            	Image icon = shipImg.getImage();
 	            	Image resize = icon.getScaledInstance(22,  22,  java.awt.Image.SCALE_SMOOTH);
@@ -267,6 +297,8 @@ public class ClientGameWindow extends GameWindow {
 		        if (message.equals("sunkDestroyer"))
 	            {
 	            	setMessage("You sunk your opponent's destroyer!");
+	            	AudioPlayer audio = new AudioPlayer();
+            		audio.play("./Sounds/sunk.wav");
 	            	ImageIcon shipImg = new ImageIcon("Images/hit.png");
 	            	Image icon = shipImg.getImage();
 	            	Image resize = icon.getScaledInstance(22,  22,  java.awt.Image.SCALE_SMOOTH);
@@ -277,6 +309,8 @@ public class ClientGameWindow extends GameWindow {
 	            if (message.equals("lose"))
 	            {
 	            	setMessage("You defeated the enemy and have won the game!");
+	            	AudioPlayer audio = new AudioPlayer();
+            		audio.play("./Sounds/won.wav");
 	            	ImageIcon shipImg = new ImageIcon("Images/hit.png");
 	            	Image icon = shipImg.getImage();
 	            	Image resize = icon.getScaledInstance(22,  22,  java.awt.Image.SCALE_SMOOTH);
@@ -539,6 +573,8 @@ public class ClientGameWindow extends GameWindow {
 			   		{
 			   			windowModel.setGameState(0);
 			   			setMessage("Awaiting enemy move.");
+			   			AudioPlayer audio = new AudioPlayer();
+	            		audio.play("./Sounds/gameStart.wav");
 			   		} else
 			   		{
 			   			setMessage("Waiting for opponent to finish placing ships.");
