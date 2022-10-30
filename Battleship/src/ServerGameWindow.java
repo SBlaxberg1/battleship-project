@@ -501,6 +501,7 @@ public class ServerGameWindow extends GameWindow {
 		   } else if (windowModel.getGameState() == 0) // server turn
 		   {
 			   // send shot to opponent
+			   serverGrid[x][y].setEnabled(false);
 			   setMessage("Fired shot at " + x + ", " + y + ".");
 			   netCordsX = x;
 			   netCordsY = y;
