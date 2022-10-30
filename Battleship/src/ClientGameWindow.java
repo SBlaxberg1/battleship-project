@@ -154,6 +154,7 @@ public class ClientGameWindow extends GameWindow {
 		            		setMessage("Enemy shot at " + x + ", " + y + " and sunk your carrier!");
 		            		AudioPlayer audio = new AudioPlayer();
 		            		audio.play("./Sounds/sunk.wav");
+		            		playerCarrierLabel.setEnabled(false);
 			            	windowModel.setGameState(1);
 			            	setMessage("Your turn. Click on the enemy's grid to fire a shot.");
 	            	} else if (didHit.equals("sunkBattleship"))
@@ -166,6 +167,7 @@ public class ClientGameWindow extends GameWindow {
 		            	setMessage("Enemy shot at " + x + ", " + y + " and sunk your battleship!");
 		            	AudioPlayer audio = new AudioPlayer();
 	            		audio.play("./Sounds/sunk.wav");
+	            		playerBShipLabel.setEnabled(false);
 			            windowModel.setGameState(1);
 			            setMessage("Your turn. Click on the enemy's grid to fire a shot.");
 	            	} else if (didHit.equals("sunkCruiser"))
@@ -178,6 +180,7 @@ public class ClientGameWindow extends GameWindow {
 		            	setMessage("Enemy shot at " + x + ", " + y + " and sunk your cruiser!");
 		            	AudioPlayer audio = new AudioPlayer();
 	            		audio.play("./Sounds/sunk.wav");
+	            		playerCruiserLabel.setEnabled(false);
 			            windowModel.setGameState(1);
 			            setMessage("Your turn. Click on the enemy's grid to fire a shot.");
 	            	} else if (didHit.equals("sunkSubmarine"))
@@ -190,6 +193,7 @@ public class ClientGameWindow extends GameWindow {
 		            	setMessage("Enemy shot at " + x + ", " + y + " and sunk your submarine!");
 		            	AudioPlayer audio = new AudioPlayer();
 	            		audio.play("./Sounds/sunk.wav");
+	            		playerSubmarineLabel.setEnabled(false);
 			            windowModel.setGameState(1);
 			            setMessage("Your turn. Click on the enemy's grid to fire a shot.");
 	            	} else if (didHit.equals("sunkDestroyer"))
@@ -202,6 +206,7 @@ public class ClientGameWindow extends GameWindow {
 		            	setMessage("Enemy shot at " + x + ", " + y + " and sunk your destroyer!");
 		            	AudioPlayer audio = new AudioPlayer();
 	            		audio.play("./Sounds/sunk.wav");
+	            		playerDestroyerLabel.setEnabled(false);
 			            windowModel.setGameState(1);
 			            setMessage("Your turn. Click on the enemy's grid to fire a shot.");
 	            	}
@@ -249,6 +254,7 @@ public class ClientGameWindow extends GameWindow {
 	            if (message.equals("sunkCarrier"))
 	            {
 	            	setMessage("You sunk your opponent's carrier!");
+	            	enemyCarrierLabel.setEnabled(false);
 	            	AudioPlayer audio = new AudioPlayer();
             		audio.play("./Sounds/sunk.wav");
 	            	ImageIcon shipImg = new ImageIcon("Images/hit.png");
@@ -261,6 +267,7 @@ public class ClientGameWindow extends GameWindow {
 		        if (message.equals("sunkBattleship"))
 		            {
 		            	setMessage("You sunk your opponent's battleship!");
+		            	enemyBShipLabel.setEnabled(false);
 		            	AudioPlayer audio = new AudioPlayer();
 	            		audio.play("./Sounds/sunk.wav");
 		            	ImageIcon shipImg = new ImageIcon("Images/hit.png");
@@ -273,6 +280,7 @@ public class ClientGameWindow extends GameWindow {
 		        if (message.equals("sunkCruiser"))
 	            {
 	            	setMessage("You sunk your opponent's cruiser!");
+	            	enemyCruiserLabel.setEnabled(false);
 	            	AudioPlayer audio = new AudioPlayer();
             		audio.play("./Sounds/sunk.wav");
 	            	ImageIcon shipImg = new ImageIcon("Images/hit.png");
@@ -285,6 +293,7 @@ public class ClientGameWindow extends GameWindow {
 		        if (message.equals("sunkSubmarine"))
 	            {
 	            	setMessage("You sunk your opponent's submarine!");
+	            	enemySubmarineLabel.setEnabled(false);
 	            	AudioPlayer audio = new AudioPlayer();
             		audio.play("./Sounds/sunk.wav");
 	            	ImageIcon shipImg = new ImageIcon("Images/hit.png");
@@ -297,6 +306,7 @@ public class ClientGameWindow extends GameWindow {
 		        if (message.equals("sunkDestroyer"))
 	            {
 	            	setMessage("You sunk your opponent's destroyer!");
+	            	enemyDestroyerLabel.setEnabled(false);
 	            	AudioPlayer audio = new AudioPlayer();
             		audio.play("./Sounds/sunk.wav");
 	            	ImageIcon shipImg = new ImageIcon("Images/hit.png");
