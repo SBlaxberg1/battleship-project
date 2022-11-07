@@ -44,6 +44,7 @@ public abstract class GameWindow extends JFrame {
 	protected JLabel playerCruiserLabel;
 	protected JLabel playerSubmarineLabel;
 	protected JLabel playerDestroyerLabel;
+	protected ImgResize imgResize;
 	JButton[][] serverGrid = new JButton[10][10];
 	JButton[][] clientGrid = new JButton[10][10];
 	JTextArea messages;
@@ -58,6 +59,7 @@ public abstract class GameWindow extends JFrame {
 	  frame = new JFrame("Battleship");
 	  primaryPanel = new JPanel();
 	  primaryPanel.setLayout(new GridLayout(2, 2));
+	  imgResize = new ImgResize();
 	  initEnemyGrid();
 	  initEnemyShips();
 	  initPlayerGrid();
@@ -84,40 +86,25 @@ public abstract class GameWindow extends JFrame {
 	  topShips.setLayout(new GridLayout(1, 3));
 	  JPanel bottomShips = new JPanel();
 	  bottomShips.setLayout(new GridLayout(1, 2));
-	  
+	  	  
 	  BufferedImage carrier = ImageIO.read(new File("Images/Carrier.png"));
-	  ImageIcon carrierIcon = new ImageIcon(carrier);
-	  Image icon1 = carrierIcon.getImage();
-	  Image resize1 = icon1.getScaledInstance(200,  75,  java.awt.Image.SCALE_SMOOTH);
-	  carrierIcon = new ImageIcon(resize1);
+	  ImageIcon carrierIcon = imgResize.resize(carrier, 200, 75);
 	  enemyCarrierLabel = new JLabel(carrierIcon);
 	  
 	  BufferedImage bship = ImageIO.read(new File("Images/BShip.png"));
-	  ImageIcon bshipIcon = new ImageIcon(bship);
-	  Image icon2 = bshipIcon.getImage();
-	  Image resize2 = icon2.getScaledInstance(200,  75,  java.awt.Image.SCALE_SMOOTH);
-	  bshipIcon = new ImageIcon(resize2);
+	  ImageIcon bshipIcon = imgResize.resize(bship, 200, 75);
 	  enemyBShipLabel = new JLabel(bshipIcon);
 	  
 	  BufferedImage cruiser = ImageIO.read(new File("Images/Cruiser.png"));
-	  ImageIcon cruiserIcon = new ImageIcon(cruiser);
-	  Image icon3 = cruiserIcon.getImage();
-	  Image resize3 = icon3.getScaledInstance(200,  75,  java.awt.Image.SCALE_SMOOTH);
-	  cruiserIcon = new ImageIcon(resize3);
+	  ImageIcon cruiserIcon = imgResize.resize(cruiser, 200, 75);
 	  enemyCruiserLabel = new JLabel(cruiserIcon);
 	  
 	  BufferedImage submarine = ImageIO.read(new File("Images/Submarine.png"));
-	  ImageIcon subIcon = new ImageIcon(submarine);
-	  Image icon4 = subIcon.getImage();
-	  Image resize4 = icon4.getScaledInstance(200,  75,  java.awt.Image.SCALE_SMOOTH);
-	  subIcon = new ImageIcon(resize4);
-	  enemySubmarineLabel = new JLabel(subIcon);
+	  ImageIcon submarineIcon = imgResize.resize(submarine, 200, 75);
+	  enemySubmarineLabel = new JLabel(submarineIcon);
 	  
 	  BufferedImage destroyer = ImageIO.read(new File("Images/Destroyer.png"));
-	  ImageIcon destroyerIcon = new ImageIcon(destroyer);
-	  Image icon5 = destroyerIcon.getImage();
-	  Image resize5 = icon5.getScaledInstance(200,  75,  java.awt.Image.SCALE_SMOOTH);
-	  destroyerIcon = new ImageIcon(resize5);
+	  ImageIcon destroyerIcon = imgResize.resize(destroyer, 200, 75);
 	  enemyDestroyerLabel = new JLabel(destroyerIcon);
 
 	  topShips.add(enemyCarrierLabel);
@@ -184,38 +171,23 @@ public abstract class GameWindow extends JFrame {
 	  bottomShips.setLayout(new GridLayout(1, 2));
 	 
 	  BufferedImage carrier = ImageIO.read(new File("Images/Carrier.png"));
-	  ImageIcon carrierIcon = new ImageIcon(carrier);
-	  Image icon1 = carrierIcon.getImage();
-	  Image resize1 = icon1.getScaledInstance(200,  75,  java.awt.Image.SCALE_SMOOTH);
-	  carrierIcon = new ImageIcon(resize1);
+	  ImageIcon carrierIcon = imgResize.resize(carrier, 200, 75);
 	  playerCarrierLabel = new JLabel(carrierIcon);
 	  
 	  BufferedImage bship = ImageIO.read(new File("Images/BShip.png"));
-	  ImageIcon bshipIcon = new ImageIcon(bship);
-	  Image icon2 = bshipIcon.getImage();
-	  Image resize2 = icon2.getScaledInstance(200,  75,  java.awt.Image.SCALE_SMOOTH);
-	  bshipIcon = new ImageIcon(resize2);
+	  ImageIcon bshipIcon = imgResize.resize(bship, 200, 75);
 	  playerBShipLabel = new JLabel(bshipIcon);
 	  
 	  BufferedImage cruiser = ImageIO.read(new File("Images/Cruiser.png"));
-	  ImageIcon cruiserIcon = new ImageIcon(cruiser);
-	  Image icon3 = cruiserIcon.getImage();
-	  Image resize3 = icon3.getScaledInstance(200,  75,  java.awt.Image.SCALE_SMOOTH);
-	  cruiserIcon = new ImageIcon(resize3);
+	  ImageIcon cruiserIcon = imgResize.resize(cruiser, 200, 75);
 	  playerCruiserLabel = new JLabel(cruiserIcon);
 	  
 	  BufferedImage submarine = ImageIO.read(new File("Images/Submarine.png"));
-	  ImageIcon subIcon = new ImageIcon(submarine);
-	  Image icon4 = subIcon.getImage();
-	  Image resize4 = icon4.getScaledInstance(200,  75,  java.awt.Image.SCALE_SMOOTH);
-	  subIcon = new ImageIcon(resize4);
-	  playerSubmarineLabel = new JLabel(subIcon);
+	  ImageIcon submarineIcon = imgResize.resize(submarine, 200, 75);
+	  playerSubmarineLabel = new JLabel(submarineIcon);
 	  
 	  BufferedImage destroyer = ImageIO.read(new File("Images/Destroyer.png"));
-	  ImageIcon destroyerIcon = new ImageIcon(destroyer);
-	  Image icon5 = destroyerIcon.getImage();
-	  Image resize5 = icon5.getScaledInstance(200,  75,  java.awt.Image.SCALE_SMOOTH);
-	  destroyerIcon = new ImageIcon(resize5);
+	  ImageIcon destroyerIcon = imgResize.resize(destroyer, 200, 75);
 	  playerDestroyerLabel = new JLabel(destroyerIcon);
 	  
 	  topShips.add(playerCarrierLabel);
